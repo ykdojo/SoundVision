@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Novocaine.h"
 
 @interface FirstViewController : UIViewController
 
+@property (nonatomic, strong) Novocaine *audioManager;
+@property (nonatomic, retain) IBOutlet UIButton *playButton;
+- (IBAction)togglePlay:(UIButton *)selectedButton;
 
 @end
-

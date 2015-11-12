@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7DA9EF541BF52D0C005F3A13 /* Novocaine.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA9EF4F1BF52D0C005F3A13 /* Novocaine.m */; };
 		7DD9FB741BF42BCC009956E5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9FB731BF42BCC009956E5 /* main.m */; };
 		7DD9FB771BF42BCC009956E5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9FB761BF42BCC009956E5 /* AppDelegate.m */; };
-		7DD9FB7A1BF42BCC009956E5 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9FB791BF42BCC009956E5 /* FirstViewController.m */; };
+		7DD9FB7A1BF42BCC009956E5 /* FirstViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9FB791BF42BCC009956E5 /* FirstViewController.mm */; };
 		7DD9FB7D1BF42BCC009956E5 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9FB7C1BF42BCC009956E5 /* SecondViewController.m */; };
 		7DD9FB801BF42BCC009956E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DD9FB7E1BF42BCC009956E5 /* Main.storyboard */; };
 		7DD9FB821BF42BCC009956E5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DD9FB811BF42BCC009956E5 /* Images.xcassets */; };
@@ -28,13 +29,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7DA9EF4E1BF52D0C005F3A13 /* Novocaine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Novocaine.h; sourceTree = "<group>"; };
+		7DA9EF4F1BF52D0C005F3A13 /* Novocaine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Novocaine.m; sourceTree = "<group>"; };
 		7DD9FB6E1BF42BCB009956E5 /* SoundVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DD9FB721BF42BCC009956E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7DD9FB731BF42BCC009956E5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7DD9FB751BF42BCC009956E5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7DD9FB761BF42BCC009956E5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7DD9FB781BF42BCC009956E5 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		7DD9FB791BF42BCC009956E5 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		7DD9FB791BF42BCC009956E5 /* FirstViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FirstViewController.mm; sourceTree = "<group>"; };
 		7DD9FB7B1BF42BCC009956E5 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		7DD9FB7C1BF42BCC009956E5 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		7DD9FB7F1BF42BCC009956E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -63,9 +66,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7DA9EF491BF52D0C005F3A13 /* Novocaine */ = {
+			isa = PBXGroup;
+			children = (
+				7DA9EF4E1BF52D0C005F3A13 /* Novocaine.h */,
+				7DA9EF4F1BF52D0C005F3A13 /* Novocaine.m */,
+			);
+			path = Novocaine;
+			sourceTree = "<group>";
+		};
 		7DD9FB651BF42BCB009956E5 = {
 			isa = PBXGroup;
 			children = (
+				7DA9EF491BF52D0C005F3A13 /* Novocaine */,
 				7DD9FB701BF42BCB009956E5 /* SoundVision */,
 				7DD9FB8D1BF42BCC009956E5 /* SoundVisionTests */,
 				7DD9FB6F1BF42BCB009956E5 /* Products */,
@@ -87,7 +100,7 @@
 				7DD9FB751BF42BCC009956E5 /* AppDelegate.h */,
 				7DD9FB761BF42BCC009956E5 /* AppDelegate.m */,
 				7DD9FB781BF42BCC009956E5 /* FirstViewController.h */,
-				7DD9FB791BF42BCC009956E5 /* FirstViewController.m */,
+				7DD9FB791BF42BCC009956E5 /* FirstViewController.mm */,
 				7DD9FB7B1BF42BCC009956E5 /* SecondViewController.h */,
 				7DD9FB7C1BF42BCC009956E5 /* SecondViewController.m */,
 				7DD9FB7E1BF42BCC009956E5 /* Main.storyboard */,
@@ -226,7 +239,8 @@
 			files = (
 				7DD9FB7D1BF42BCC009956E5 /* SecondViewController.m in Sources */,
 				7DD9FB771BF42BCC009956E5 /* AppDelegate.m in Sources */,
-				7DD9FB7A1BF42BCC009956E5 /* FirstViewController.m in Sources */,
+				7DD9FB7A1BF42BCC009956E5 /* FirstViewController.mm in Sources */,
+				7DA9EF541BF52D0C005F3A13 /* Novocaine.m in Sources */,
 				7DD9FB741BF42BCC009956E5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,6 +364,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SoundVision/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -360,6 +375,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SoundVision/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -418,6 +434,7 @@
 				7DD9FB961BF42BCC009956E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7DD9FB971BF42BCC009956E5 /* Build configuration list for PBXNativeTarget "SoundVisionTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +443,7 @@
 				7DD9FB991BF42BCC009956E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
