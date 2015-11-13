@@ -60,9 +60,7 @@ int state = 0; // TODO: Fix this to an enum.
     const float T = 3.0; // time length of one cycle
     const float amplitude = 1;
     
-    
     float *frequencies = new float[y];
-    // TODO: try an exponential scale.
     float frequency_max = 4500.0;
     float frequency_min = 1500.0;
     frequencies[0] = frequency_max;
@@ -134,7 +132,7 @@ int state = 0; // TODO: Fix this to an enum.
          }
      }];
     
-    [self.audioManager play];
+//    [self.audioManager play];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
