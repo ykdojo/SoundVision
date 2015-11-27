@@ -51,6 +51,7 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     @"aaaaapppppaaaaaaappppppaaaaaaappppppaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     @"aaaaapppppaaaaaaappppppaaaaaaappppppaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     @"aaaaapppppaaaaaaappppppaaaaaaappppppaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    
     @"aaaaapppppaaaaaaappppppaaaaaaappppppaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     @"aaaaapppppaaaaaaappppppaaaaaaappppppaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     @"aaaaapppppaaaaaaappppppaaaaaaappppppaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
@@ -124,8 +125,6 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     
     self.audioManager = [Novocaine audioManager];
     
-    
-    // SIGNAL GENERATOR!
     const float T = 1.0; // time length of one cycle
     const float amplitude = 0.05; // the maximum amplitude we can use seems to be like 0.05.  I'm not 100% sure on this though.
     
@@ -154,7 +153,6 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
         for( int y_ind = 0 ; y_ind < y ; y_ind++ ){
             // this way, we get 'p' = 15 and 'a' = 0.
             float char_converted = (float)([peterStrings[y_ind] characterAtIndex:x_ind] - 'a') / 15.0;
-            NSLog(@"converted: %f", char_converted);
             matrix[x_ind + y_ind * x] = char_converted;
         }
     }
@@ -163,7 +161,9 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     [self.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
      {
          //         NSLog(@"Time: %f", t);
-         if (t > T){
+         float samplingRate = wself.audioManager.samplingRate;
+
+         if (t + 2.0 / samplingRate > T){
              [wself.audioManager pause];
              //             free(matrix);
              //             free(frequencies);
@@ -174,7 +174,6 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
          }
          
          int length = x;
-         float samplingRate = wself.audioManager.samplingRate;
          for (int i=0; i < numFrames; ++i)
          {
              
