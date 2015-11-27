@@ -6,8 +6,8 @@
 @implementation FirstViewController
 
 float t = 0;
-int x = 100;
-int y = 100;
+int x = 64;
+int y = 64;
 float *phases = new float[y];
 int state = 0; // TODO: Fix this to an enum.
 
@@ -103,21 +103,10 @@ int state = 0; // TODO: Fix this to an enum.
              for (int y_ind = 0; y_ind < y; y_ind++){
                  float theta = phases[y_ind] * M_PI * 2;
                  
-                 tmp += sin(theta) * matrix[x_ind + y_ind*x];
-                 
-                 // The following code was just for an experimentation, maybe delete it later
-                 //                 float freq = frequencies[y_ind];
-                 //                 int tmp_2 = int(t * freq);
-                 //                 float left = tmp_2 / freq;
-                 //                 float right = left + 1 / freq;
-                 //                 int x_left = int( (left / T) * length );
-                 //                 int x_right = int( (right / T) * length );
-                 //                 if (x_left == x_right || x_right >= x) {
-                 //                     tmp += sin(theta) * matrix[x_left + y_ind*x];
-                 //                 }
-                 //                 else{
-                 //                     tmp += sin(theta) * (0.5 * matrix[x_left + y_ind*x] + 0.5 * matrix[x_right + y_ind*x]);
-                 //                 }
+                 // make sure the index doesn't exceed the limit
+                 if (x_ind + y_ind*x < y*x) {
+                     tmp += sin(theta) * matrix[x_ind + y_ind*x];
+                 }
              }
              
              // copying the same data for both channels (left and right speakers)
