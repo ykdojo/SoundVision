@@ -119,7 +119,7 @@ const float amplitude = 0.05; // the maximum amplitude we can use seems to be li
 }
 
 
-// this function plays the matrix
+// this function converts the matrix into sound
 - (void)playMatrix: (float*) matrix
           x_length: (int) x_len
           y_length: (int) y_len
