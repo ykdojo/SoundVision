@@ -5,7 +5,6 @@
 
 @implementation FirstViewController
 
-int count_A = -1;
 float t = 0;
 long current_frame = 0;
 int x = 64; // set x = y = 64 when using Peter's strings.
@@ -112,7 +111,6 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
 - (IBAction)togglePlay:(UIButton *)selectedButton
 {
     if (state == 0){
-        count_A += 1;
         [self playMatrix:matrix_to_play x_length: x y_length: y];
         [selectedButton setTitle:NSLocalizedString(@"Stop Sound Vision", nil) forState:0];
         state = 1;
@@ -129,9 +127,6 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
           x_length: (int) x_len
           y_length: (int) y_len
 {
-    if(count_A % 2 == 0) {
-        NSLog(@"no filtering");
-    }
 
     __weak FirstViewController * wself = self;
     for (int i = 0; i < y_len; i++){
@@ -142,19 +137,13 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
 
     [self.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
      {
-         //         NSLog(@"Time: %f", t);
          float samplingRate = wself.audioManager.samplingRate;
          long m = (long) (samplingRate * T / x_len);
-//         NSLog(@"m: %li", m);
          
-         if (t + 1.0 / samplingRate > T){
+         if (t + 2.0 / samplingRate > T){
              [wself.audioManager pause];
              state = 0;
-             if(count_A % 2 == 0) {
-                 [wself.playButton setTitle:NSLocalizedString(@"Smooth", nil) forState:0];
-             } else {
-                 [wself.playButton setTitle:NSLocalizedString(@"Rectangular", nil) forState:0];
-             }
+            [wself.playButton setTitle:NSLocalizedString(@"Start Sound Vision", nil) forState:0];
          }
          
          for (int i=0; i < numFrames; ++i)
@@ -163,17 +152,13 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
              float q = 1.0 * (current_frame % m) / (m - 1);
              float q2 = 0.5*q*q;
              current_frame += 1;
-//             NSLog(@"current_frame: %li", current_frame);
 
              float tmp = 0;
              for (int y_i = 0; y_i < y_len; y_i++){
                  float theta = phases[y_i] * M_PI * 2;
-                 
+
                  // make sure the index doesn't exceed the limit
-                 if (x_i < x_len && y_i < y_len) {
-//                     if (x_i + y_i * x_len >= x_len * y_len){
-//                         NSLog(@"This shouldn't happen!");
-//                     }
+                 if (x_i < x_len){
                      float tmp_amplitude;
                      if (x_i == 0){
                          tmp_amplitude =
@@ -190,10 +175,6 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
                             (q2 - q +0.5) * A[(x_i - 1) + y_i*x_len]
                          + (0.5+q-q*q) * A[x_i + y_i*x_len]
                          + q2 * A[(x_i + 1) + y_i*x_len];
-                     }
-                     
-                     if(count_A % 2 == 0) {
-                         tmp_amplitude = A[x_i + y_i*x_len];
                      }
                     
                      tmp += sin(theta) * tmp_amplitude;
