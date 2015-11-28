@@ -5,12 +5,21 @@
 
 @implementation FirstViewController
 
+int count_A = -1;
 float t = 0;
+long current_frame = 0;
 int x = 64; // set x = y = 64 when using Peter's strings.
 int y = 64;
 float *matrix_to_play = new float[x*y];
 float *phases = new float[y];
 int state = 0; // TODO: Fix this to an enum.
+
+float *frequencies = new float[y];
+float frequency_max = 5000.0;
+float frequency_min = 500.0;
+const float T = 1.05; // time length of one cycle
+const float amplitude = 0.05; // the maximum amplitude we can use seems to be like 0.05.  I'm not 100% sure on this though.
+
 
 // something
 
@@ -84,11 +93,6 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     @"aappppppppppppppaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"];
 
 
-float *frequencies = new float[y];
-float frequency_max = 5000.0;
-float frequency_min = 500.0;
-const float T = 1.0; // time length of one cycle
-const float amplitude = 0.05; // the maximum amplitude we can use seems to be like 0.05.  I'm not 100% sure on this though.
 
 
 
@@ -108,6 +112,7 @@ const float amplitude = 0.05; // the maximum amplitude we can use seems to be li
 - (IBAction)togglePlay:(UIButton *)selectedButton
 {
     if (state == 0){
+        count_A += 1;
         [self playMatrix:matrix_to_play x_length: x y_length: y];
         [selectedButton setTitle:NSLocalizedString(@"Stop Sound Vision", nil) forState:0];
         state = 1;
@@ -120,56 +125,78 @@ const float amplitude = 0.05; // the maximum amplitude we can use seems to be li
 
 
 // this function converts the matrix into sound
-- (void)playMatrix: (float*) matrix
+- (void)playMatrix: (float*) A
           x_length: (int) x_len
           y_length: (int) y_len
 {
+    if(count_A % 2 == 0) {
+        NSLog(@"no filtering");
+    }
+
     __weak FirstViewController * wself = self;
     for (int i = 0; i < y_len; i++){
         phases[i] = 0.0;
     }
     t = 0;
+    current_frame = 0;
 
     [self.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
      {
          //         NSLog(@"Time: %f", t);
          float samplingRate = wself.audioManager.samplingRate;
-         long current_frame = 0;
-         long m = (long) (samplingRate * T / x);
+         long m = (long) (samplingRate * T / x_len);
+//         NSLog(@"m: %li", m);
          
          if (t + 1.0 / samplingRate > T){
              [wself.audioManager pause];
-             //             free(matrix);
-             //             free(frequencies);
-             //             free(phases);
-             // TODO: fix this later.
              state = 0;
-             [wself.playButton setTitle:NSLocalizedString(@"Start Sound Vision", nil) forState:0];
+             if(count_A % 2 == 0) {
+                 [wself.playButton setTitle:NSLocalizedString(@"Smooth", nil) forState:0];
+             } else {
+                 [wself.playButton setTitle:NSLocalizedString(@"Rectangular", nil) forState:0];
+             }
          }
          
          for (int i=0; i < numFrames; ++i)
          {
-             int x_ind = int( (t / T) * x_len ); // x index
-             current_frame += 1;
+             int x_i = int( (t / T) * x_len ); // x index
              float q = 1.0 * (current_frame % m) / (m - 1);
              float q2 = 0.5*q*q;
+             current_frame += 1;
+//             NSLog(@"current_frame: %li", current_frame);
 
              float tmp = 0;
-             for (int y_ind = 0; y_ind < y_len; y_ind++){
-                 float theta = phases[y_ind] * M_PI * 2;
+             for (int y_i = 0; y_i < y_len; y_i++){
+                 float theta = phases[y_i] * M_PI * 2;
                  
                  // make sure the index doesn't exceed the limit
-                 if (x_ind < x_len && y_ind < y_len) {
-//                     if (x_ind == 0){
-//                     
+                 if (x_i < x_len && y_i < y_len) {
+//                     if (x_i + y_i * x_len >= x_len * y_len){
+//                         NSLog(@"This shouldn't happen!");
 //                     }
-//                     else if (x_ind == x_len - 1) {
-//                     
-//                     }
-//                     else {
-                         tmp += sin(theta) * matrix[x_ind + y_ind*x_len];
-//                     }
-
+                     float tmp_amplitude;
+                     if (x_i == 0){
+                         tmp_amplitude =
+                            (1.0 - q2) * A[x_i + y_i*x_len]
+                         + q2 * A[(x_i + 1) + y_i*x_len];
+                     }
+                     else if (x_i == x_len - 1) {
+                         tmp_amplitude =
+                            (q2 - q +0.5) * A[(x_i - 1) + y_i*x_len]
+                         + (0.5 + q - q2) * A[x_i + y_i*x_len];
+                     }
+                     else {
+                         tmp_amplitude =
+                            (q2 - q +0.5) * A[(x_i - 1) + y_i*x_len]
+                         + (0.5+q-q*q) * A[x_i + y_i*x_len]
+                         + q2 * A[(x_i + 1) + y_i*x_len];
+                     }
+                     
+                     if(count_A % 2 == 0) {
+                         tmp_amplitude = A[x_i + y_i*x_len];
+                     }
+                    
+                     tmp += sin(theta) * tmp_amplitude;
                  }
              }
              
@@ -186,7 +213,6 @@ const float amplitude = 0.05; // the maximum amplitude we can use seems to be li
          }
      }];
     [self.audioManager play];
-
 }
 
 
@@ -197,7 +223,7 @@ const float amplitude = 0.05; // the maximum amplitude we can use seems to be li
     
     self.audioManager = [Novocaine audioManager];
     frequencies[0] = frequency_max;
-    float mult_rate = pow( frequency_min / frequency_max, 1/float(y));
+    float mult_rate = pow( frequency_min / frequency_max, 1/float(y-1));
     for (int i = 1; i < y; i++) {
         // exponential scale
         frequencies[i] = frequencies[i - 1] * mult_rate;
@@ -206,22 +232,22 @@ const float amplitude = 0.05; // the maximum amplitude we can use seems to be li
         //        frequencies[i] = frequency_max - i * frequency_diff / (y - 1);
     }
     
-//    // IDENTITY
-//    for (int i = 0; i < x*y; i++){
-//        matrix_to_play[i] = 0.0;
-//    }
-//    for (int i = 0; i < y; i++){
-//        matrix_to_play[x * i + i] = 1.0;
-//    }
+    // IDENTITY
+    for (int i = 0; i < x*y; i++){
+        matrix_to_play[i] = 0.0;
+    }
+    for (int i = 0; i < y; i++){
+        matrix_to_play[x * i + i] = 1.0;
+    }
     
     // Peter's strings (it's the B&W drawing here: https://www.seeingwithsound.com/im2sound.htm)
-    for( int x_ind = 0 ; x_ind < x ; x_ind++ ){
-        for( int y_ind = 0 ; y_ind < y ; y_ind++ ){
-            // this way, we get 'p' = 15 and 'a' = 0.
-            float char_converted = (float)([peterStrings[y_ind] characterAtIndex:x_ind] - 'a') / 15.0;
-            matrix_to_play[x_ind + y_ind * x] = char_converted;
-        }
-    }
+//    for( int x_i = 0 ; x_i < x ; x_i++ ){
+//        for( int y_i = 0 ; y_i < y ; y_i++ ){
+//            // this way, we get 'p' = 15 and 'a' = 0.
+//            float char_converted = (float)([peterStrings[y_i] characterAtIndex:x_i] - 'a') / 15.0;
+//            matrix_to_play[x_i + y_i * x] = char_converted;
+//        }
+//    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
