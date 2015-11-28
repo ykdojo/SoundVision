@@ -134,8 +134,10 @@ const float amplitude = 0.05; // the maximum amplitude we can use seems to be li
      {
          //         NSLog(@"Time: %f", t);
          float samplingRate = wself.audioManager.samplingRate;
+         long current_frame = 0;
+         long m = (long) (samplingRate * T / x);
          
-         if (t + 2.0 / samplingRate > T){
+         if (t + 1.0 / samplingRate > T){
              [wself.audioManager pause];
              //             free(matrix);
              //             free(frequencies);
@@ -147,15 +149,27 @@ const float amplitude = 0.05; // the maximum amplitude we can use seems to be li
          
          for (int i=0; i < numFrames; ++i)
          {
-             
              int x_ind = int( (t / T) * x_len ); // x index
+             current_frame += 1;
+             float q = 1.0 * (current_frame % m) / (m - 1);
+             float q2 = 0.5*q*q;
+
              float tmp = 0;
              for (int y_ind = 0; y_ind < y_len; y_ind++){
                  float theta = phases[y_ind] * M_PI * 2;
                  
                  // make sure the index doesn't exceed the limit
-                 if (x_ind + y_ind*x_len < y_len*x_len) {
-                     tmp += sin(theta) * matrix[x_ind + y_ind*x_len];
+                 if (x_ind < x_len && y_ind < y_len) {
+//                     if (x_ind == 0){
+//                     
+//                     }
+//                     else if (x_ind == x_len - 1) {
+//                     
+//                     }
+//                     else {
+                         tmp += sin(theta) * matrix[x_ind + y_ind*x_len];
+//                     }
+
                  }
              }
              
