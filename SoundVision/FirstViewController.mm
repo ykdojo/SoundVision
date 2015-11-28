@@ -159,7 +159,7 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
          
          for (int i=0; i < numFrames; ++i)
          {
-             int x_i = int( (t / T) * x_len ); // x index
+             int x_i = current_frame / m;
              float q = 1.0 * (current_frame % m) / (m - 1);
              float q2 = 0.5*q*q;
              current_frame += 1;
@@ -232,7 +232,7 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
         //        frequencies[i] = frequency_max - i * frequency_diff / (y - 1);
     }
     
-    // IDENTITY
+//    // IDENTITY
     for (int i = 0; i < x*y; i++){
         matrix_to_play[i] = 0.0;
     }
@@ -240,7 +240,7 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
         matrix_to_play[x * i + i] = 1.0;
     }
     
-    // Peter's strings (it's the B&W drawing here: https://www.seeingwithsound.com/im2sound.htm)
+//     Peter's strings (it's the B&W drawing here: https://www.seeingwithsound.com/im2sound.htm)
 //    for( int x_i = 0 ; x_i < x ; x_i++ ){
 //        for( int y_i = 0 ; y_i < y ; y_i++ ){
 //            // this way, we get 'p' = 15 and 'a' = 0.
