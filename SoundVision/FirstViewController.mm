@@ -125,7 +125,7 @@ const float amplitude = 0.05; // the maximum amplitude we can use seems to be li
           y_length: (int) y_len
 {
     __weak FirstViewController * wself = self;
-    for (int i = 0; i < y; i++){
+    for (int i = 0; i < y_len; i++){
         phases[i] = 0.0;
     }
     t = 0;
@@ -145,18 +145,17 @@ const float amplitude = 0.05; // the maximum amplitude we can use seems to be li
              [wself.playButton setTitle:NSLocalizedString(@"Start Sound Vision", nil) forState:0];
          }
          
-         int length = x;
          for (int i=0; i < numFrames; ++i)
          {
              
-             int x_ind = int( (t / T) * length ); // x index
+             int x_ind = int( (t / T) * x_len ); // x index
              float tmp = 0;
-             for (int y_ind = 0; y_ind < y; y_ind++){
+             for (int y_ind = 0; y_ind < y_len; y_ind++){
                  float theta = phases[y_ind] * M_PI * 2;
                  
                  // make sure the index doesn't exceed the limit
-                 if (x_ind + y_ind*x < y*x) {
-                     tmp += sin(theta) * matrix[x_ind + y_ind*x];
+                 if (x_ind + y_ind*x_len < y_len*x_len) {
+                     tmp += sin(theta) * matrix[x_ind + y_ind*x_len];
                  }
              }
              
@@ -165,7 +164,7 @@ const float amplitude = 0.05; // the maximum amplitude we can use seems to be li
              {
                  data[i*numChannels + iChannel] = tmp * amplitude;
              }
-             for (int i = 0; i < y; i++){
+             for (int i = 0; i < y_len; i++){
                  phases[i] += 1.0 / (samplingRate / frequencies[i]);
                  if (phases[i] > 1.0) phases[i] = -1;
              }
