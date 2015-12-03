@@ -187,10 +187,10 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
                      
                      float x_abs = fabs(x_distance);
                      float diffraction;
-                     if (v / frequencies[y_i] > x_abs){
+                     if (v / frequencies[y - y_i - 1] > x_abs){
                          diffraction = 1;
                      } else {
-                         diffraction = v / (x_abs * frequencies[i]);
+                         diffraction = v / (x_abs * frequencies[y - y_i - 1]);
                      }
 
                      float fade_l = 1;
