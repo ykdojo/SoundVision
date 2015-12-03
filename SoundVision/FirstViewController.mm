@@ -10,7 +10,6 @@ long current_frame = 0;
 int x = 64; // set x = y = 64 when using Peter's strings.
 int y = 64;
 float *matrix_to_play = new float[x*y];
-float *phases = new float[y];
 int state = 0; // TODO: Fix this to an enum.
 
 float *frequencies = new float[y];
@@ -129,9 +128,6 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
 {
 
     __weak FirstViewController * wself = self;
-    for (int i = 0; i < y_len; i++){
-        phases[i] = 0.0;
-    }
     t = 0;
     current_frame = 0;
 
@@ -155,7 +151,7 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
 
              float tmp = 0;
              for (int y_i = 0; y_i < y_len; y_i++){
-                 float theta = phases[y_i] * M_PI * 2;
+                 float theta = frequencies[y_i] * M_PI * 2 * t;
 
                  // make sure the index doesn't exceed the limit
                  if (x_i < x_len){
@@ -185,10 +181,6 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
              for (int iChannel = 0; iChannel < numChannels; ++iChannel)
              {
                  data[i*numChannels + iChannel] = tmp * amplitude;
-             }
-             for (int i = 0; i < y_len; i++){
-                 phases[i] += 1.0 / (samplingRate / frequencies[i]);
-                 if (phases[i] > 1.0) phases[i] = -1;
              }
              t += 1.0 / samplingRate;
          }
