@@ -185,13 +185,25 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
                      float theta_l = frequencies[y_i] * M_PI * 2 * tl;
                      float theta_r = frequencies[y_i] * M_PI * 2 * tr;
                      
+                     float x_abs = fabs(x_distance);
+                     float diffraction;
+                     if (v / frequencies[y_i] > x_abs){
+                         diffraction = 1;
+                     } else {
+                         diffraction = v / (x_abs * frequencies[i]);
+                     }
+
                      float fade_l = 1;
                      float fade_r = 1;
+
+//                     if (theta_2 < 0.0) { fade_l = 1.0; fade_r = diffraction; }
+//                     else { fade_l = diffraction; fade_r = 1; }
+                     
                      fade_l *= (1.0 - 0.7*r);
                      fade_r *= (0.3 + 0.7*r);
 
-                     sl += 1 * tmp_amplitude * sin(theta_l);
-                     sr += 1 * tmp_amplitude * sin(theta_r);
+                     sl += fade_l * tmp_amplitude * sin(theta_l);
+                     sr += fade_r * tmp_amplitude * sin(theta_r);
                  }
              }
              
