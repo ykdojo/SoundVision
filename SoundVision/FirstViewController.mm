@@ -134,25 +134,33 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     [self.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
      {
          float samplingRate = wself.audioManager.samplingRate;
-         long m = (long) (samplingRate * T / x_len);
-         
-         if (t + 2.0 / samplingRate > T){
+
+         // +3.0 helps us get rid of the noise that we don't want at the end.
+         if (t + 3.0 / samplingRate * numFrames >= T){
              [wself.audioManager pause];
              state = 0;
-            [wself.playButton setTitle:NSLocalizedString(@"Start Sound Vision", nil) forState:0];
+             [wself.playButton setTitle:NSLocalizedString(@"Start Sound Vision", nil) forState:0];
          }
-         
+
          for (int i=0; i < numFrames; ++i)
          {
+             long m = (long) (samplingRate * T / x_len);
+             float r = 1.0 * current_frame / (floor (T*samplingRate) - 1);
+             float theta_2 = (r - 0.5) * 2 * M_PI / 3;
+             float head_size = 0.2; // in meters, I think
+             float x_distance = 0.5 * head_size * (theta_2 + sin(theta_2));
+             float v = 340; // speed of sound, 340 m/s
+             float tl = t;
+             float tr = t;
+             tr += x_distance / v;
+             
              int x_i = current_frame / m;
              float q = 1.0 * (current_frame % m) / (m - 1);
              float q2 = 0.5*q*q;
              current_frame += 1;
 
-             float tmp = 0;
+             float sl = 0;
              for (int y_i = 0; y_i < y_len; y_i++){
-                 float theta = frequencies[y_i] * M_PI * 2 * t;
-
                  // make sure the index doesn't exceed the limit
                  if (x_i < x_len){
                      float tmp_amplitude;
@@ -173,14 +181,15 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
                          + q2 * A[(x_i + 1) + y_i*x_len];
                      }
                     
-                     tmp += sin(theta) * tmp_amplitude;
+                     float theta_l = frequencies[y_i] * M_PI * 2 * tl;
+                     sl += 1 * tmp_amplitude * sin(theta_l);
                  }
              }
              
              // copying the same data for both channels (left and right speakers)
              for (int iChannel = 0; iChannel < numChannels; ++iChannel)
              {
-                 data[i*numChannels + iChannel] = tmp * amplitude;
+                 data[i*numChannels + iChannel] = sl * amplitude;
              }
              t += 1.0 / samplingRate;
          }
