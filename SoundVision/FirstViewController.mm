@@ -160,6 +160,7 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
              current_frame += 1;
 
              float sl = 0;
+             float sr = 0;
              for (int y_i = 0; y_i < y_len; y_i++){
                  // make sure the index doesn't exceed the limit
                  if (x_i < x_len){
@@ -182,14 +183,27 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
                      }
                     
                      float theta_l = frequencies[y_i] * M_PI * 2 * tl;
+                     float theta_r = frequencies[y_i] * M_PI * 2 * tr;
+                     
+                     float fade_l = 1;
+                     float fade_r = 1;
+                     fade_l *= (1.0 - 0.7*r);
+                     fade_r *= (0.3 + 0.7*r);
+
                      sl += 1 * tmp_amplitude * sin(theta_l);
+                     sr += 1 * tmp_amplitude * sin(theta_r);
                  }
              }
              
              // copying the same data for both channels (left and right speakers)
              for (int iChannel = 0; iChannel < numChannels; ++iChannel)
              {
-                 data[i*numChannels + iChannel] = sl * amplitude;
+                 // left channel
+                 if(iChannel == 0) {
+                     data[i*numChannels + iChannel] = sl * amplitude;
+                 } else { // right channel
+                     data[i*numChannels + iChannel] = sr * amplitude;
+                 }
              }
              t += 1.0 / samplingRate;
          }
