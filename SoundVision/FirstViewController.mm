@@ -9,6 +9,7 @@ float t = 0;
 long current_frame = 0;
 int x = 64; // set x = y = 64 when using Peter's strings.
 int y = 64;
+float *phases = new float[y]; // random phases
 float *matrix_to_play = new float[x*y];
 int state = 0; // TODO: Fix this to an enum.
 
@@ -130,13 +131,17 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     __weak FirstViewController * wself = self;
     t = 0;
     current_frame = 0;
+    for (int i = 0; i < y_len; i++){
+        phases[i] = (float)rand() / RAND_MAX * 2 * M_PI;
+    }
+    
 
     [self.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
      {
          float samplingRate = wself.audioManager.samplingRate;
 
          // +3.0 helps us get rid of the noise that we don't want at the end.
-         if (t + 3.0 / samplingRate * numFrames >= T){
+         if (t + 4.0 / samplingRate * numFrames >= T){
              [wself.audioManager pause];
              state = 0;
              [wself.playButton setTitle:NSLocalizedString(@"Start Sound Vision", nil) forState:0];
@@ -202,8 +207,9 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
                      fade_l *= (1.0 - 0.7*r);
                      fade_r *= (0.3 + 0.7*r);
 
-                     sl += fade_l * tmp_amplitude * sin(theta_l);
-                     sr += fade_r * tmp_amplitude * sin(theta_r);
+                     sl += fade_l * tmp_amplitude * sin(theta_l + phases[y_i]);
+                     sr += fade_r * tmp_amplitude * sin(theta_r + phases[y_i]);
+//                     NSLog(@"phase: %f", phases[y_i]);
                  }
              }
              
