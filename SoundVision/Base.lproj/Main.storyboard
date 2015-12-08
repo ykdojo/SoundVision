@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -50,7 +50,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="xzZ-Qs-nt2" secondAttribute="trailing" constant="10" id="q6r-zT-wfC"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="SoundVision" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="SoundVision" image="scan-icon" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="playButton" destination="xzZ-Qs-nt2" id="82e-5t-EXN"/>
                     </connections>
@@ -96,7 +96,7 @@
                             <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="About" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="About" image="about-icon" id="cPa-gy-q4n"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -114,35 +114,98 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
+                        <segue destination="Hc4-zQ-fif" kind="relationship" relationship="viewControllers" id="1iK-AN-bSH"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="tYo-Cd-5X7">
+        <!--Settings-->
+        <scene sceneID="9ok-PT-MBB">
             <objects>
-                <viewController id="gcO-NY-1Kw" sceneMemberID="viewController">
+                <viewController id="Hc4-zQ-fif" customClass="FirstViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0Hv-wz-wAh"/>
-                        <viewControllerLayoutGuide type="bottom" id="MnL-K9-TFy"/>
+                        <viewControllerLayoutGuide type="top" id="8We-LV-DnD"/>
+                        <viewControllerLayoutGuide type="bottom" id="qZq-WR-yjj"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ZL9-Mc-qsj">
+                    <view key="view" contentMode="scaleToFill" id="MRn-or-C9x">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6F-Mb-b9F">
+                                <rect key="frame" x="207" y="76" width="186" height="84"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3000" minValue="1000" maxValue="5000" translatesAutoresizingMaskIntoConstraints="NO" id="ZEz-ck-Vzx">
+                                <rect key="frame" x="135" y="227" width="330" height="31"/>
+                                <animations/>
+                                <connections>
+                                    <action selector="frequencyMinSet:" destination="Hc4-zQ-fif" eventType="valueChanged" id="17b-x2-vX1"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Low Frequency:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tZl-Nx-Nbf">
+                                <rect key="frame" x="239" y="197" width="123" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2000" minValue="0.0" maxValue="4000" translatesAutoresizingMaskIntoConstraints="NO" id="lY3-5U-I96">
+                                <rect key="frame" x="135" y="317" width="330" height="31"/>
+                                <animations/>
+                                <connections>
+                                    <action selector="frequencyMaxSet:" destination="Hc4-zQ-fif" eventType="valueChanged" id="k7J-c2-6jM"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="High Frequency:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2a5-r0-OtC">
+                                <rect key="frame" x="239" y="286" width="123" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1.5" minValue="0.0" maxValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="b34-ux-cxw">
+                                <rect key="frame" x="135" y="474" width="330" height="31"/>
+                                <animations/>
+                                <connections>
+                                    <action selector="tSet:" destination="Hc4-zQ-fif" eventType="valueChanged" id="cTB-FV-P4S"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Speed:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Md9-O5-gsl">
+                                <rect key="frame" x="239" y="443" width="123" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="Q6F-Mb-b9F" secondAttribute="centerX" id="596-4a-amM"/>
+                            <constraint firstAttribute="centerX" secondItem="Md9-O5-gsl" secondAttribute="centerX" id="5hz-QB-MuT"/>
+                            <constraint firstAttribute="centerX" secondItem="2a5-r0-OtC" secondAttribute="centerX" id="AyH-ta-tRn"/>
+                            <constraint firstAttribute="centerX" secondItem="ZEz-ck-Vzx" secondAttribute="centerX" id="WAJ-3A-GP2"/>
+                            <constraint firstAttribute="centerX" secondItem="b34-ux-cxw" secondAttribute="centerX" id="e99-xR-Ico"/>
+                            <constraint firstAttribute="centerX" secondItem="lY3-5U-I96" secondAttribute="centerX" id="k5c-qK-rzn"/>
+                            <constraint firstAttribute="centerX" secondItem="tZl-Nx-Nbf" secondAttribute="centerX" id="zfT-6a-Qey"/>
+                        </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Settings" image="setting-icon" id="vNN-kG-B7F"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZBe-M5-Kop" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kJ9-ty-EXK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-43" y="792"/>
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="about-icon" width="92" height="92"/>
+        <image name="scan-icon" width="30" height="30"/>
+        <image name="setting-icon" width="77" height="77"/>
     </resources>
 </document>

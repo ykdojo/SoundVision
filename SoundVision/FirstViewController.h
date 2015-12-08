@@ -15,4 +15,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *playButton;
 - (IBAction)togglePlay:(UIButton *)selectedButton;
 
+- (IBAction)frequencyMaxSet:(UISlider *)sender;
+- (IBAction)frequencyMinSet:(UISlider *)sender;
+- (IBAction)tSet:(UISlider *)sender;
+
 @end

@@ -20,6 +20,19 @@ const float T = 1.05; // time length of one cycle
 const float amplitude = 0.05; // the maximum amplitude we can use seems to be like 0.05.  I'm not 100% sure on this though.
 
 
+// settings page
+- (IBAction)frequencyMaxSet:(UISlider *)sender {
+    frequency_max = sender.value;
+}
+
+- (IBAction)frequencyMinSet:(UISlider *)sender {
+    frequency_min = sender.value;
+}
+
+- (IBAction)tSet:(UISlider *)sender {
+    t = sender.value;
+}
+
 // something
 
 // Peter's house and car drawing, 64 x 64 pixels,
