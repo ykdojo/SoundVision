@@ -99,12 +99,43 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    int width = 16;
+    int height = 16;
+
+    int *dat = new int[width*height];
+    for( int i = 0; i < width*height; i++){
+        dat[i] = 100;
+    }
+    
+    CGDataProviderRef dataProvider =
+    CGDataProviderCreateWithData(NULL, dat, width*height, NULL);
+    
+    CGColorSpaceRef colourSpace = CGColorSpaceCreateDeviceGray();
+    CGImageRef inputImage = CGImageCreate(  width, height,
+                                          8, 8, width,
+                                          colourSpace,
+                                          kCGBitmapByteOrderDefault,
+                                          dataProvider,
+                                          NULL, NO,
+                                          kCGRenderingIntentDefault);
+    CGDataProviderRelease(dataProvider);
+    CGColorSpaceRelease(colourSpace);
+    
+    UIImage *image = [UIImage imageWithCGImage:inputImage];
+    CGImageRelease(inputImage);
+    UIImageView *_dImageView = [[UIImageView alloc] initWithImage:image];
+    self.view = _dImageView;
+    //    [self.view addSubview:_dImageView];
+    NSLog(@"hellooiwjafojwepfoijawepfojawefpiawjefpoajweiof");
+
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+    
 }
 
 
