@@ -23,14 +23,20 @@ const float amplitude = 0.05; // the maximum amplitude we can use seems to be li
 // settings page
 - (IBAction)frequencyMaxSet:(UISlider *)sender {
     frequency_max = sender.value;
+
+    frequencyMax.text = [[NSString alloc] initWithFormat: @"%i", (int) (frequency_max + 0.5)];
 }
 
 - (IBAction)frequencyMinSet:(UISlider *)sender {
     frequency_min = sender.value;
+    
+    frequencyMin.text = [[NSString alloc] initWithFormat: @"%i", (int) (frequency_min + 0.5)];
 }
 
 - (IBAction)tSet:(UISlider *)sender {
     t = sender.value;
+    
+    tValue.text = [[NSString alloc] initWithFormat: @"%.1f", t];
 }
 
 // something
@@ -111,6 +117,10 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    frequencyMax.text = [[NSString alloc] initWithFormat: @"%i", (int) (frequency_max + 0.5)];
+    frequencyMin.text = [[NSString alloc] initWithFormat: @"%i", (int) (frequency_min + 0.5)];
+    tValue.text = [[NSString alloc] initWithFormat: @"%.1f", t];
     // Do any additional setup after loading the view, typically from a nib.
 }
 

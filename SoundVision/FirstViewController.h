@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Novocaine.h"
 
-@interface FirstViewController : UIViewController
+@interface FirstViewController : UIViewController {
+    IBOutlet UILabel *frequencyMax;
+    IBOutlet UILabel *frequencyMin;
+    IBOutlet UILabel *tValue;
+}
 
 @property (nonatomic, strong) Novocaine *audioManager;
 @property (nonatomic, retain) IBOutlet UIButton *playButton;
