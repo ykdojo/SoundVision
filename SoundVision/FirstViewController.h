@@ -15,4 +15,13 @@
 @property (nonatomic, retain) IBOutlet UIButton *playButton;
 - (IBAction)togglePlay:(UIButton *)selectedButton;
 
+@property (weak, nonatomic) IBOutlet UISlider *minFrequencySlider;
+@property (weak, nonatomic) IBOutlet UILabel *minFrequencyVal;
+
+@property (weak, nonatomic) IBOutlet UISlider *maxFrequencySlider;
+@property (weak, nonatomic) IBOutlet UILabel *maxFrequencyVal;
+
+@property (weak, nonatomic) IBOutlet UISlider *speedSlider;
+@property (weak, nonatomic) IBOutlet UILabel *speedVal;
+
 @end
