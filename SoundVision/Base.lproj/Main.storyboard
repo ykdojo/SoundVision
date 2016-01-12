@@ -170,13 +170,6 @@ Please note that the app does not work when the device is locked. It needs to be
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jjZ-0z-Kwq">
                                 <rect key="frame" x="140" y="41" width="321" height="448"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6AC-Af-kUM">
-                                        <rect key="frame" x="92" y="8" width="137" height="54"/>
-                                        <animations/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1500" minValue="0.0" maxValue="3000" translatesAutoresizingMaskIntoConstraints="NO" id="ltM-gu-vM3">
                                         <rect key="frame" x="18" y="115" width="285" height="31"/>
                                         <animations/>
@@ -261,6 +254,13 @@ Please note that the app does not work when the device is locked. It needs to be
                                             <action selector="maxFrequencySet:" destination="gcO-NY-1Kw" eventType="valueChanged" id="cAh-3z-DkZ"/>
                                         </connections>
                                     </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6AC-Af-kUM">
+                                        <rect key="frame" x="92" y="0.0" width="137" height="54"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -270,6 +270,7 @@ Please note that the app does not work when the device is locked. It needs to be
                                     <constraint firstItem="ltM-gu-vM3" firstAttribute="trailing" secondItem="xYy-Ew-maq" secondAttribute="trailing" id="97m-EW-cbH"/>
                                     <constraint firstItem="xYy-Ew-maq" firstAttribute="leading" secondItem="qvU-Wg-3Ji" secondAttribute="leading" id="9co-p3-I18"/>
                                     <constraint firstItem="6AC-Af-kUM" firstAttribute="centerX" secondItem="ltM-gu-vM3" secondAttribute="centerX" id="A7q-x3-Csy"/>
+                                    <constraint firstAttribute="centerX" secondItem="6AC-Af-kUM" secondAttribute="centerX" id="CFe-rS-xfX"/>
                                     <constraint firstItem="ltM-gu-vM3" firstAttribute="leading" secondItem="J7a-n2-W9c" secondAttribute="leading" id="EgF-LS-M1h"/>
                                     <constraint firstItem="qvU-Wg-3Ji" firstAttribute="baseline" secondItem="n5O-f9-bQv" secondAttribute="baseline" id="Ext-um-Ko3"/>
                                     <constraint firstItem="AED-EQ-AEd" firstAttribute="baseline" secondItem="zzJ-hc-NlN" secondAttribute="baseline" id="Ffp-pD-qDP"/>
@@ -284,7 +285,6 @@ Please note that the app does not work when the device is locked. It needs to be
                                     <constraint firstItem="7Tb-3H-xVM" firstAttribute="leading" secondItem="zzJ-hc-NlN" secondAttribute="leading" id="YkX-B4-J7I"/>
                                     <constraint firstItem="J7a-n2-W9c" firstAttribute="top" secondItem="ltM-gu-vM3" secondAttribute="bottom" constant="81" id="aw9-Eu-hc0"/>
                                     <constraint firstItem="qvU-Wg-3Ji" firstAttribute="trailing" secondItem="ltM-gu-vM3" secondAttribute="trailing" id="b9K-TP-18U"/>
-                                    <constraint firstItem="6AC-Af-kUM" firstAttribute="leading" secondItem="jjZ-0z-Kwq" secondAttribute="leading" constant="92" id="hGT-Jj-KRm"/>
                                     <constraint firstItem="qvU-Wg-3Ji" firstAttribute="firstBaseline" secondItem="n5O-f9-bQv" secondAttribute="firstBaseline" id="j9J-Al-12x"/>
                                     <constraint firstItem="xYy-Ew-maq" firstAttribute="baseline" secondItem="J7a-n2-W9c" secondAttribute="baseline" id="jcp-UB-uWa"/>
                                     <constraint firstItem="7Tb-3H-xVM" firstAttribute="trailing" secondItem="AED-EQ-AEd" secondAttribute="trailing" id="nch-N1-Q4D"/>
@@ -293,7 +293,6 @@ Please note that the app does not work when the device is locked. It needs to be
                                     <constraint firstItem="n5O-f9-bQv" firstAttribute="leading" secondItem="jjZ-0z-Kwq" secondAttribute="leading" constant="20" id="vpB-Ra-SXT"/>
                                     <constraint firstItem="6AC-Af-kUM" firstAttribute="top" secondItem="jjZ-0z-Kwq" secondAttribute="topMargin" id="wLD-AN-zv9"/>
                                     <constraint firstItem="xYy-Ew-maq" firstAttribute="trailing" secondItem="ccV-RZ-1ni" secondAttribute="trailing" id="xPV-88-tfI"/>
-                                    <constraint firstItem="n5O-f9-bQv" firstAttribute="top" secondItem="6AC-Af-kUM" secondAttribute="bottom" constant="24" id="xb9-fx-UI4"/>
                                     <constraint firstItem="zzJ-hc-NlN" firstAttribute="top" secondItem="ccV-RZ-1ni" secondAttribute="bottom" constant="96" id="y4J-Sm-z9y"/>
                                     <constraint firstItem="7Tb-3H-xVM" firstAttribute="bottom" secondItem="jjZ-0z-Kwq" secondAttribute="bottomMargin" id="ytx-TY-nqY"/>
                                 </constraints>
@@ -321,7 +320,7 @@ Please note that the app does not work when the device is locked. It needs to be
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZBe-M5-Kop" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="187" y="771"/>
+            <point key="canvasLocation" x="129" y="785"/>
         </scene>
     </scenes>
     <resources>
