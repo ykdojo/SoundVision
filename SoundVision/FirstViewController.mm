@@ -101,13 +101,13 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     // Do any additional setup after loading the view, typically from a nib.
     
     frequency_min = self.minFrequencySlider.value;
-    self.minFrequencyVal.text = [NSString stringWithFormat:@"%i", (int)roundf(frequency_min)];
+    self.minFrequencyVal.text = [NSString stringWithFormat:@"%i Hertz", (int)roundf(frequency_min)];
     
     frequency_max = self.maxFrequencySlider.value;
-    self.maxFrequencyVal.text = [NSString stringWithFormat:@"%i", (int)roundf(frequency_max)];
+    self.maxFrequencyVal.text = [NSString stringWithFormat:@"%i Hertz", (int)roundf(frequency_max)];
     
     t = self.speedSlider.value;
-    self.speedVal.text = [NSString stringWithFormat:@"%.1f", t];
+    self.speedVal.text = [NSString stringWithFormat:@"%.1f s", t];
 }
 
 - (void)viewDidUnload
@@ -120,21 +120,21 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
 - (IBAction)minFrequencySet:(id)sender {
     frequency_min = self.minFrequencySlider.value;
     
-    self.minFrequencyVal.text = [NSString stringWithFormat:@"%i", (int)roundf(frequency_min)];
+    self.minFrequencyVal.text = [NSString stringWithFormat:@"%i Hertz", (int)roundf(frequency_min)];
 }
 
 
 - (IBAction)maxFrequencySet:(id)sender {
     frequency_max = self.maxFrequencySlider.value;
     
-    self.maxFrequencyVal.text = [NSString stringWithFormat:@"%i", (int)roundf(frequency_max)];
+    self.maxFrequencyVal.text = [NSString stringWithFormat:@"%i Hertz", (int)roundf(frequency_max)];
 }
 
 
 - (IBAction)speedSet:(id)sender {
     t = self.speedSlider.value;
     
-    self.speedVal.text = [NSString stringWithFormat:@"%.1f", t];
+    self.speedVal.text = [NSString stringWithFormat:@"%.1f s", t];
 }
 
 

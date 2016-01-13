@@ -87,7 +87,7 @@
                                     <constraint firstAttribute="width" constant="240" id="4oS-m1-B9W"/>
                                     <constraint firstAttribute="height" constant="267" id="kgK-8F-1eY"/>
                                 </constraints>
-                                <mutableString key="text">SoundVision allows blind and visually impaired individuals to see with sound.
+                                <string key="text">SoundVision allows blind and visually impaired individuals to see with sound.
 SoundVision works with the Structure depth sensor, and it needs to be connected to your device for the app to work.
 
 The environment in front of you is converted to sound by a vertical scanner that moves from left to right. To help understand where the scanner is, a use of stereo headphones is recommended.
@@ -95,7 +95,7 @@ The environment in front of you is converted to sound by a vertical scanner that
 The up-and-down direction is represented by the pitch of the sound. When an object is higher in the view, the sound becomes more high-pitched.
 The distance to an object is represented by the volume of the sound. When an object is closer, the sound becomes louder.
 
-Please note that the app does not work when the device is locked. It needs to be unlocked when using the app.</mutableString>
+Please note that the app does not work when the device is locked. It needs to be unlocked when using the app.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="default">
