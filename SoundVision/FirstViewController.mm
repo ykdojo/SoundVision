@@ -100,13 +100,18 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    int width = 16;
-    int height = 16;
+    int width = 64;
+    int height = 64;
 
     int *dat = new int[width*height];
-    for( int i = 0; i < width*height; i++){
-        dat[i] = i;
-    }
+    //     Peter's strings (it's the B&W drawing here: https://www.seeingwithsound.com/im2sound.htm)
+        for( int x_i = 0 ; x_i < x ; x_i++ ){
+            for( int y_i = 0 ; y_i < y ; y_i++ ){
+                // this way, we get 'p' = 15 and 'a' = 0.
+                float char_converted = (float)([peterStrings[y_i] characterAtIndex:x_i] - 'a') / 15.0;
+                dat[x_i + y_i * x] = (int)(char_converted * 255);
+            }
+        }
     
     char* rgba = (char*)malloc(width*height*4);
     for(int i=0; i < width*height; ++i) {
