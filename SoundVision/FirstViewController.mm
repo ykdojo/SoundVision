@@ -108,19 +108,27 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
         dat[i] = 100;
     }
     
-    CGDataProviderRef dataProvider =
-    CGDataProviderCreateWithData(NULL, dat, width*height, NULL);
+    char* rgba = (char*)malloc(width*height*4);
+    for(int i=0; i < width*height; ++i) {
+        rgba[4*i] = 100;
+        rgba[4*i+1] = 100;
+        rgba[4*i+2] = 100;
+        rgba[4*i+3] = 0;
+    }
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef bitmapContext = CGBitmapContextCreate(
+                                                       rgba,
+                                                       width,
+                                                       height,
+                                                       8, // bitsPerComponent
+                                                       4*width, // bytesPerRow
+                                                       colorSpace,
+                                                       kCGImageAlphaNoneSkipLast);
     
-    CGColorSpaceRef colourSpace = CGColorSpaceCreateDeviceGray();
-    CGImageRef inputImage = CGImageCreate(  width, height,
-                                          8, 8, width,
-                                          colourSpace,
-                                          kCGBitmapByteOrderDefault,
-                                          dataProvider,
-                                          NULL, NO,
-                                          kCGRenderingIntentDefault);
-    CGDataProviderRelease(dataProvider);
-    CGColorSpaceRelease(colourSpace);
+    CFRelease(colorSpace);
+    
+    CGImageRef inputImage = CGBitmapContextCreateImage(bitmapContext);
+
     
     UIImage *image = [UIImage imageWithCGImage:inputImage];
     CGImageRelease(inputImage);
