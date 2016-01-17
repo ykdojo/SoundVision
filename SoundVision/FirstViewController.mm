@@ -105,14 +105,14 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
 
     int *dat = new int[width*height];
     for( int i = 0; i < width*height; i++){
-        dat[i] = 100;
+        dat[i] = i;
     }
     
     char* rgba = (char*)malloc(width*height*4);
     for(int i=0; i < width*height; ++i) {
-        rgba[4*i] = 100;
-        rgba[4*i+1] = 100;
-        rgba[4*i+2] = 100;
+        rgba[4*i] = dat[i];
+        rgba[4*i+1] = dat[i];
+        rgba[4*i+2] = dat[i];
         rgba[4*i+3] = 0;
     }
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
