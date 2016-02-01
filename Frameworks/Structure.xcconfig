@@ -1,0 +1,19 @@
+//
+//  This file is part of the Structure SDK.
+//  Copyright © 2013 Occipital, Inc. All rights reserved.
+//  http://structure.io
+//
+
+// Building with the Structure framework requires your app to be
+// linked to the C++ runtime.
+//
+// You can use this file in Xcode's project info settings for this.
+//
+// Alternatively, you can also manually add "-lsdtc++"
+// to the "Other Linker Flags" Xcode build setting, and define HAS_STDCXX,
+// before #import'ing <Structure/Structure.h>.
+//
+
+OTHER_LDFLAGS = -lstdc++
+
+GCC_PREPROCESSOR_DEFINITIONS = HAS_STDCXX

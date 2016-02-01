@@ -17,6 +17,20 @@
 		7DD9FB851BF42BCC009956E5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DD9FB831BF42BCC009956E5 /* LaunchScreen.xib */; };
 		7DD9FB911BF42BCC009956E5 /* SoundVisionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9FB901BF42BCC009956E5 /* SoundVisionTests.m */; };
 		C854CDCA1C5EF77A00D3E966 /* RangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C854CDC91C5EF77A00D3E966 /* RangeViewController.m */; };
+		C854CDCF1C5EFA6300D3E966 /* Structure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C854CDCE1C5EFA6300D3E966 /* Structure.framework */; };
+		C854CDD11C5EFA6C00D3E966 /* Structure.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = C854CDD01C5EFA6C00D3E966 /* Structure.xcconfig */; };
+		C854CDD41C5EFB4A00D3E966 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C854CDD31C5EFB4A00D3E966 /* AudioToolbox.framework */; };
+		C854CDD61C5EFB8300D3E966 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C854CDD51C5EFB8300D3E966 /* Foundation.framework */; };
+		C854CDD81C5EFB9F00D3E966 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C854CDD71C5EFB9F00D3E966 /* AVFoundation.framework */; };
+		C854CDDA1C5EFBC200D3E966 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C854CDD91C5EFBC200D3E966 /* Accelerate.framework */; };
+		C854CDDC1C5EFBD700D3E966 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C854CDDB1C5EFBD700D3E966 /* OpenGLES.framework */; };
+		C854CDDF1C5EFC0200D3E966 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C854CDDE1C5EFC0200D3E966 /* ImageIO.framework */; };
+		C854CDE11C5EFC1000D3E966 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C854CDE01C5EFC1000D3E966 /* CoreMedia.framework */; };
+		C854CDE31C5EFC3500D3E966 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C854CDE21C5EFC3500D3E966 /* CoreGraphics.framework */; };
+		C854CDE51C5EFC4D00D3E966 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C854CDE41C5EFC4D00D3E966 /* CoreImage.framework */; };
+		C854CDE71C5EFC6000D3E966 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C854CDE61C5EFC6000D3E966 /* CoreVideo.framework */; };
+		C854CDE91C5EFC7200D3E966 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C854CDE81C5EFC7200D3E966 /* UIKit.framework */; };
+		C854CDEB1C5EFC8F00D3E966 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C854CDEA1C5EFC8F00D3E966 /* ExternalAccessory.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +63,20 @@
 		7DD9FB901BF42BCC009956E5 /* SoundVisionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoundVisionTests.m; sourceTree = "<group>"; };
 		C854CDC91C5EF77A00D3E966 /* RangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeViewController.m; sourceTree = "<group>"; };
 		C854CDCB1C5EF7B900D3E966 /* RangeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RangeViewController.h; sourceTree = "<group>"; };
+		C854CDCE1C5EFA6300D3E966 /* Structure.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Structure.framework; path = ../Frameworks/Structure.framework; sourceTree = "<group>"; };
+		C854CDD01C5EFA6C00D3E966 /* Structure.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Structure.xcconfig; path = ../Frameworks/Structure.xcconfig; sourceTree = "<group>"; };
+		C854CDD31C5EFB4A00D3E966 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
+		C854CDD51C5EFB8300D3E966 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		C854CDD71C5EFB9F00D3E966 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		C854CDD91C5EFBC200D3E966 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
+		C854CDDB1C5EFBD700D3E966 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
+		C854CDDE1C5EFC0200D3E966 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/ImageIO.framework; sourceTree = DEVELOPER_DIR; };
+		C854CDE01C5EFC1000D3E966 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
+		C854CDE21C5EFC3500D3E966 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		C854CDE41C5EFC4D00D3E966 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
+		C854CDE61C5EFC6000D3E966 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
+		C854CDE81C5EFC7200D3E966 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		C854CDEA1C5EFC8F00D3E966 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/ExternalAccessory.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +84,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C854CDE11C5EFC1000D3E966 /* CoreMedia.framework in Frameworks */,
+				C854CDE91C5EFC7200D3E966 /* UIKit.framework in Frameworks */,
+				C854CDD81C5EFB9F00D3E966 /* AVFoundation.framework in Frameworks */,
+				C854CDCF1C5EFA6300D3E966 /* Structure.framework in Frameworks */,
+				C854CDE31C5EFC3500D3E966 /* CoreGraphics.framework in Frameworks */,
+				C854CDDF1C5EFC0200D3E966 /* ImageIO.framework in Frameworks */,
+				C854CDDA1C5EFBC200D3E966 /* Accelerate.framework in Frameworks */,
+				C854CDD61C5EFB8300D3E966 /* Foundation.framework in Frameworks */,
+				C854CDE51C5EFC4D00D3E966 /* CoreImage.framework in Frameworks */,
+				C854CDD41C5EFB4A00D3E966 /* AudioToolbox.framework in Frameworks */,
+				C854CDE71C5EFC6000D3E966 /* CoreVideo.framework in Frameworks */,
+				C854CDDC1C5EFBD700D3E966 /* OpenGLES.framework in Frameworks */,
+				C854CDEB1C5EFC8F00D3E966 /* ExternalAccessory.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +126,7 @@
 				7DD9FB701BF42BCB009956E5 /* SoundVision */,
 				7DD9FB8D1BF42BCC009956E5 /* SoundVisionTests */,
 				7DD9FB6F1BF42BCB009956E5 /* Products */,
+				C854CDD21C5EFA9A00D3E966 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 0;
@@ -141,6 +183,28 @@
 				7DD9FB8F1BF42BCC009956E5 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C854CDD21C5EFA9A00D3E966 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C854CDEA1C5EFC8F00D3E966 /* ExternalAccessory.framework */,
+				C854CDE81C5EFC7200D3E966 /* UIKit.framework */,
+				C854CDE61C5EFC6000D3E966 /* CoreVideo.framework */,
+				C854CDE41C5EFC4D00D3E966 /* CoreImage.framework */,
+				C854CDE21C5EFC3500D3E966 /* CoreGraphics.framework */,
+				C854CDE01C5EFC1000D3E966 /* CoreMedia.framework */,
+				C854CDDE1C5EFC0200D3E966 /* ImageIO.framework */,
+				C854CDDB1C5EFBD700D3E966 /* OpenGLES.framework */,
+				C854CDD91C5EFBC200D3E966 /* Accelerate.framework */,
+				C854CDD71C5EFB9F00D3E966 /* AVFoundation.framework */,
+				C854CDD51C5EFB8300D3E966 /* Foundation.framework */,
+				C854CDD31C5EFB4A00D3E966 /* AudioToolbox.framework */,
+				C854CDCE1C5EFA6300D3E966 /* Structure.framework */,
+				C854CDD01C5EFA6C00D3E966 /* Structure.xcconfig */,
+			);
+			name = Frameworks;
+			path = SoundVision;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,6 +290,7 @@
 			files = (
 				7DD9FB801BF42BCC009956E5 /* Main.storyboard in Resources */,
 				7DD9FB851BF42BCC009956E5 /* LaunchScreen.xib in Resources */,
+				C854CDD11C5EFA6C00D3E966 /* Structure.xcconfig in Resources */,
 				7DD9FB821BF42BCC009956E5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,6 +439,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = SoundVision/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -389,6 +458,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = SoundVision/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
