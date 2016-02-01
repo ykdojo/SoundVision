@@ -270,6 +270,24 @@ Please note that the app does not work when the device is locked. It needs to be
             </objects>
             <point key="canvasLocation" x="129" y="785"/>
         </scene>
+        <!--RangeViewController-->
+        <scene sceneID="qmz-nC-18h">
+            <objects>
+                <viewController id="GmX-6z-tb2" userLabel="RangeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Zwr-Q9-Ldf"/>
+                        <viewControllerLayoutGuide type="bottom" id="EGV-0E-lAE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eQm-IY-Smu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IVO-7n-1pD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="210" y="1541"/>
+        </scene>
     </scenes>
     <resources>
         <image name="about-icon" width="92" height="92"/>

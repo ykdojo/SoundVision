@@ -16,6 +16,7 @@
 		7DD9FB821BF42BCC009956E5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DD9FB811BF42BCC009956E5 /* Images.xcassets */; };
 		7DD9FB851BF42BCC009956E5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DD9FB831BF42BCC009956E5 /* LaunchScreen.xib */; };
 		7DD9FB911BF42BCC009956E5 /* SoundVisionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9FB901BF42BCC009956E5 /* SoundVisionTests.m */; };
+		C854CDCA1C5EF77A00D3E966 /* RangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C854CDC91C5EF77A00D3E966 /* RangeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		7DD9FB8A1BF42BCC009956E5 /* SoundVisionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoundVisionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DD9FB8F1BF42BCC009956E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7DD9FB901BF42BCC009956E5 /* SoundVisionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoundVisionTests.m; sourceTree = "<group>"; };
+		C854CDC91C5EF77A00D3E966 /* RangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeViewController.m; sourceTree = "<group>"; };
+		C854CDCB1C5EF7B900D3E966 /* RangeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RangeViewController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +111,8 @@
 				7DD9FB811BF42BCC009956E5 /* Images.xcassets */,
 				7DD9FB831BF42BCC009956E5 /* LaunchScreen.xib */,
 				7DD9FB711BF42BCB009956E5 /* Supporting Files */,
+				C854CDC91C5EF77A00D3E966 /* RangeViewController.m */,
+				C854CDCB1C5EF7B900D3E966 /* RangeViewController.h */,
 			);
 			path = SoundVision;
 			sourceTree = "<group>";
@@ -239,6 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C854CDCA1C5EF77A00D3E966 /* RangeViewController.m in Sources */,
 				7DD9FB7D1BF42BCC009956E5 /* SecondViewController.m in Sources */,
 				7DD9FB771BF42BCC009956E5 /* AppDelegate.m in Sources */,
 				7DD9FB7A1BF42BCC009956E5 /* FirstViewController.mm in Sources */,
