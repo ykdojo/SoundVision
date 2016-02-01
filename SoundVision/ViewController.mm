@@ -4,8 +4,7 @@
  http://structure.io
  */
 
-
-#import "RangeViewController.h"
+#import "ViewController.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
@@ -40,18 +39,18 @@
 
 double lastTimePlayed = 0; // the last time the sound was played
 
-float t = 0;
-long current_frame = 0;
-int x = 176;
-int y = 64;
-char* rgba = (char*)malloc(x*y*4);
-float *matrix_to_play = new float[x*y];
-float *phases = new float[y]; // random phases
-int state = 0; // TODO: Fix this to an enum.
+float t_rename = 0;
+long current_frame_rename = 0;
+int x_rename = 176;
+int y_rename = 64;
+char* rgba = (char*)malloc(x_rename*y_rename*4);
+float *matrix_to_play_rename = new float[x_rename*y_rename];
+float *phases_rename = new float[y_rename]; // random phases_rename
+int state_rename = 0; // TODO: Fix this to an enum.
 
-float *frequencies = new float[y];
-float frequency_max = 5000.0;
-float frequency_min = 500.0;
+float *frequencies_rename = new float[y_rename];
+float frequency_max_rename = 5000.0;
+float frequency_min_rename = 500.0;
 const float T = 1.05; // time length of one cycle
 const float amplitude = 0.0001; // TODO: try a lower number.
 
@@ -63,10 +62,10 @@ const float amplitude = 0.0001; // TODO: try a lower number.
 {
     
     __weak ViewController * wself = self;
-    t = 0;
-    current_frame = 0;
+    t_rename = 0;
+    current_frame_rename = 0;
     for (int i = 0; i < y_len; i++){
-        phases[i] = (float)rand() / RAND_MAX * 2 * M_PI;
+        phases_rename[i] = (float)rand() / RAND_MAX * 2 * M_PI;
     }
     
     
@@ -75,27 +74,27 @@ const float amplitude = 0.0001; // TODO: try a lower number.
          float samplingRate = wself.audioManager.samplingRate;
          
          // +4.0 helps us get rid of the noise that we don't want at the end.
-         if (t + 4.0 / samplingRate * numFrames >= T){
+         if (t_rename + 4.0 / samplingRate * numFrames >= T){
              [wself.audioManager pause];
-             state = 0;
+             state_rename = 0;
          }
          
          for (int i=0; i < numFrames; ++i)
          {
              long m = (long) (samplingRate * T / x_len);
-             float r = 1.0 * current_frame / (floor (T*samplingRate) - 1);
+             float r = 1.0 * current_frame_rename / (floor (T*samplingRate) - 1);
              float theta_2 = (r - 0.5) * 2 * M_PI / 3;
              float head_size = 0.2; // in meters, I think
              float x_distance = 0.5 * head_size * (theta_2 + sin(theta_2));
              float v = 340; // speed of sound, 340 m/s
-             float tl = t;
-             float tr = t;
+             float tl = t_rename;
+             float tr = t_rename;
              tr += x_distance / v;
              
-             int x_i = current_frame / m;
-             float q = 1.0 * (current_frame % m) / (m - 1);
+             int x_i = current_frame_rename / m;
+             float q = 1.0 * (current_frame_rename % m) / (m - 1);
              float q2 = 0.5*q*q;
-             current_frame += 1;
+             current_frame_rename += 1;
              
              float sl = 0;
              float sr = 0;
@@ -120,15 +119,15 @@ const float amplitude = 0.0001; // TODO: try a lower number.
                          + q2 * A[(x_i + 1) + y_i*x_len];
                      }
                      
-                     float theta_l = frequencies[y_i] * M_PI * 2 * tl;
-                     float theta_r = frequencies[y_i] * M_PI * 2 * tr;
+                     float theta_l = frequencies_rename[y_i] * M_PI * 2 * tl;
+                     float theta_r = frequencies_rename[y_i] * M_PI * 2 * tr;
                      
                      float x_abs = fabs(x_distance);
                      float diffraction;
-                     if (v / frequencies[y - y_i - 1] > x_abs){
+                     if (v / frequencies_rename[y_rename - y_i - 1] > x_abs){
                          diffraction = 1;
                      } else {
-                         diffraction = v / (x_abs * frequencies[y - y_i - 1]);
+                         diffraction = v / (x_abs * frequencies_rename[y_rename - y_i - 1]);
                      }
                      
                      float fade_l = 1;
@@ -137,8 +136,8 @@ const float amplitude = 0.0001; // TODO: try a lower number.
                      fade_l *= (1.0 - 0.7*r);
                      fade_r *= (0.3 + 0.7*r);
                      
-                     sl += fade_l * tmp_amplitude * sin(theta_l + phases[y_i]);
-                     sr += fade_r * tmp_amplitude * sin(theta_r + phases[y_i]);
+                     sl += fade_l * tmp_amplitude * sin(theta_l + phases_rename[y_i]);
+                     sr += fade_r * tmp_amplitude * sin(theta_r + phases_rename[y_i]);
                  }
              }
              
@@ -152,7 +151,7 @@ const float amplitude = 0.0001; // TODO: try a lower number.
                      data[i*numChannels + iChannel] = sr * amplitude;
                  }
              }
-             t += 1.0 / samplingRate;
+             t_rename += 1.0 / samplingRate;
          }
      }];
     [self.audioManager play];
@@ -166,12 +165,12 @@ const float amplitude = 0.0001; // TODO: try a lower number.
     // Initialize the audio manager
     self.audioManager = [Novocaine audioManager];
     
-    // Setting the frequencies
-    frequencies[0] = frequency_max;
-    float mult_rate = pow( frequency_min / frequency_max, 1/float(y));
-    for (int i = 1; i < y; i++) {
-        frequencies[i] = frequencies[i - 1] * mult_rate; // exponential scale
-        //        frequencies[i] = frequency_max - i * frequency_diff / (y - 1); // linear scale
+    // Setting the frequencies_rename
+    frequencies_rename[0] = frequency_max_rename;
+    float mult_rate = pow( frequency_min_rename / frequency_max_rename, 1/float(y_rename));
+    for (int i = 1; i < y_rename; i++) {
+        frequencies_rename[i] = frequencies_rename[i - 1] * mult_rate; // exponential scale
+        //        frequencies_rename[i] = frequency_max_rename - i * frequency_diff / (y_rename - 1); // linear scale
     }
     
     
@@ -360,8 +359,8 @@ const float amplitude = 0.0001; // TODO: try a lower number.
         lastTimePlayed = now;
         float depth;
         
-        for (int x_ind = 0; x_ind < x; x_ind++){
-            for (int y_ind = 0; y_ind < y; y_ind++){
+        for (int x_ind = 0; x_ind < x_rename; x_ind++){
+            for (int y_ind = 0; y_ind < y_rename; y_ind++){
                 float sum = 0;
                 int count = 0;
                 int S = 0; // sample range, start with 0 and make it larger and larger
@@ -370,8 +369,8 @@ const float amplitude = 0.0001; // TODO: try a lower number.
                         for (int j = -S; j <= S; j++){
                             // the only relevant indices are the edges
                             if (abs(i) == S or abs(j) == S){
-                                int x_ind_translated = (int)( (x_ind + i + 0.5) * (depthFrame->width / x) );
-                                int y_ind_translated = (int)( (y_ind + j + 0.5) * (depthFrame->height / y) );
+                                int x_ind_translated = (int)( (x_ind + i + 0.5) * (depthFrame->width / x_rename) );
+                                int y_ind_translated = (int)( (y_ind + j + 0.5) * (depthFrame->height / y_rename) );
                                 // make sure the indices we are looking at are inside the matrix
                                 if (x_ind_translated >= 0
                                     && x_ind_translated < depthFrame -> width
@@ -425,14 +424,14 @@ const float amplitude = 0.0001; // TODO: try a lower number.
                     exp_scale = powf(10, (linear_scale * 16 - 16) / 10);
                 }
                 
-                matrix_to_play[x_ind + y_ind * x] = exp_scale;
+                matrix_to_play_rename[x_ind + y_ind * x_rename] = exp_scale;
             }
         }
         
         //        NSString *d = [NSString stringWithFormat:@"%f", ratioNaN];
         //        [self showStatusMessage:d];
         
-        [self playMatrix:matrix_to_play x_length: x y_length: y];
+        [self playMatrix:matrix_to_play_rename x_length: x_rename y_length: y_rename];
         [self renderDepthFrame:depthFrame];
         
     }
@@ -455,8 +454,8 @@ const float amplitude = 0.0001; // TODO: try a lower number.
 - (void) renderDepthFrame: (STDepthFrame*) depthFrame
 {
     
-    for(int i=0; i < x*y; ++i) {
-        int tmp_color = (int) (matrix_to_play[i] * 255);
+    for(int i=0; i < x_rename*y_rename; ++i) {
+        int tmp_color = (int) (matrix_to_play_rename[i] * 255);
         rgba[4*i] = tmp_color;
         rgba[4*i+1] = tmp_color;
         rgba[4*i+2] = tmp_color;
@@ -465,10 +464,10 @@ const float amplitude = 0.0001; // TODO: try a lower number.
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef bitmapContext = CGBitmapContextCreate(
                                                        rgba,
-                                                       x,
-                                                       y,
+                                                       x_rename,
+                                                       y_rename,
                                                        8, // bitsPerComponent
-                                                       4*x, // bytesPerRow
+                                                       4*x_rename, // bytesPerRow
                                                        colorSpace,
                                                        kCGImageAlphaNoneSkipLast);
     
