@@ -4,7 +4,7 @@
  http://structure.io
  */
 
-#import "ViewController.h"
+#import "RangeFinderViewController.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
@@ -15,7 +15,7 @@
 
 
 
-@interface ViewController () <AVCaptureVideoDataOutputSampleBufferDelegate> {
+@interface RangeFinderViewController () <AVCaptureVideoDataOutputSampleBufferDelegate> {
     
     STSensorController *_sensorController;
     
@@ -34,7 +34,7 @@
 
 @end
 
-@implementation ViewController
+@implementation RangeFinderViewController
 
 
 double lastTimePlayed = 0; // the last time the sound was played
@@ -61,7 +61,7 @@ const float amplitude = 0.0001; // TODO: try a lower number.
           y_length: (int) y_len
 {
     
-    __weak ViewController * wself = self;
+    __weak RangeFinderViewController * wself = self;
     t_rename = 0;
     current_frame_rename = 0;
     for (int i = 0; i < y_len; i++){

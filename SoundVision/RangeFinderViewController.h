@@ -10,6 +10,6 @@
 #define HAS_STDCXX
 #import <Structure/Structure.h>
 
-@interface ViewController : UIViewController <STSensorControllerDelegate, AVAudioPlayerDelegate>
+@interface RangeFinderViewController : UIViewController <STSensorControllerDelegate, AVAudioPlayerDelegate>
 @property (nonatomic, strong) Novocaine *audioManager;
 @end
