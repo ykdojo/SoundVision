@@ -100,10 +100,10 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    frequency_min = self.minFrequencySlider.value;
+    frequency_min = self.minFrequencySlider.value = 500.0;
     self.minFrequencyVal.text = [NSString stringWithFormat:@"%i Hertz", (int)roundf(frequency_min)];
     
-    frequency_max = self.maxFrequencySlider.value;
+    frequency_max = self.maxFrequencySlider.value = 5000.0;
     self.maxFrequencyVal.text = [NSString stringWithFormat:@"%i Hertz", (int)roundf(frequency_max)];
     
     t = self.speedSlider.value;
