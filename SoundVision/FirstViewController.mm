@@ -152,16 +152,6 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     }
 }
 
-// convert the x index so that if it's -1 (too much on the left), it becomes (xMax - 1) (on the right most column)
-// and if we have xMax (too much on the right), it becomes 0 (on the left most column)
-- (int)convertIndex:
-                        (int) xIndex
-           x_length: (int) x_len
-{
-    return 1;
-}
-
-
 
 // this function converts the matrix into sound
 - (void)playMatrix: (float*) A
