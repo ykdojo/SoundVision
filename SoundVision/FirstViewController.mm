@@ -7,8 +7,8 @@
 
 float t = 0;
 long current_frame = 0;
-int x = 64; // set x = y = 64 when using Peter's strings.
-int y = 64;
+int x = 8; // set x = y = 64 when using Peter's strings.
+int y = 8;
 float *phases = new float[y]; // random phases
 float *matrix_to_play = new float[x*y];
 int state = 0; // TODO: Fix this to an enum.
@@ -209,33 +209,18 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
              float q = 1.0 * (current_frame % m) / (m - 1);
              float q2 = 0.5*q*q;
 
-             // go back to the beginning right before current_frame
-             //  reaches numFramesTotal
-             // (that's what the % is for here yo)
-             current_frame = (current_frame + 1) % numFramesTotal;
-
              float sl = 0;
              float sr = 0;
              for (int y_i = 0; y_i < y_len; y_i++){
                      float tmp_amplitude;
-                     if (x_i == 0){
-                         tmp_amplitude =
-                            (1.0 - q2) * A[x_i + y_i*x_len]
-                         + q2 * A[(x_i + 1) + y_i*x_len];
-                     }
-                     else if (x_i == x_len - 1) {
-                         tmp_amplitude =
-                            (q2 - q +0.5) * A[(x_i - 1) + y_i*x_len]
-                         + (0.5 + q - q2) * A[x_i + y_i*x_len];
-                     }
-                     else {
-                         int x_ind_left = [self convertIndex:(x_i - 1) x_length:x_len];
-                         int x_ind_right = [self convertIndex:(x_i + 1) x_length:x_len];
-                         tmp_amplitude =
-                            (q2 - q +0.5) * A[x_ind_left + y_i*x_len]
-                         + (0.5+q-q*q) * A[x_i + y_i*x_len]
-                         + q2 * A[x_ind_right + y_i*x_len];
-                     }
+                     int x_ind_left = [self convertIndex:(x_i - 1) x_length:x_len];
+                     int x_ind_right = [self convertIndex:(x_i + 1) x_length:x_len];
+                 
+                    // test if this part is correct!
+                     tmp_amplitude =
+                        (q2 - q +0.5) * A[x_ind_left + y_i*x_len]
+                     + (0.5+q-q*q) * A[x_i + y_i*x_len]
+                     + q2 * A[x_ind_right + y_i*x_len];
                     
                      float theta_l = frequencies[y_i] * M_PI * 2 * tl;
                      float theta_r = frequencies[y_i] * M_PI * 2 * tr;
@@ -272,6 +257,11 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
                      data[i*numChannels + iChannel] = sr * amplitude;
                  }
              }
+             
+             // go back to the beginning right before current_frame
+             //  reaches numFramesTotal
+             // (that's what the % is for here yo)
+             current_frame = (current_frame + 1) % numFramesTotal;
              t = current_frame * 1.0 / samplingRate;
          }
      }];
