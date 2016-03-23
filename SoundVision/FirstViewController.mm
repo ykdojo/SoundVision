@@ -208,7 +208,11 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
              int x_i = current_frame / m;
              float q = 1.0 * (current_frame % m) / (m - 1);
              float q2 = 0.5*q*q;
-             current_frame += 1;
+
+             // go back to the beginning right before current_frame
+             //  reaches numFramesTotal
+             // (that's what the % is for here yo)
+             current_frame = (current_frame + 1) % numFramesTotal;
 
              float sl = 0;
              float sr = 0;
