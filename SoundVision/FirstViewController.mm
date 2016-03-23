@@ -216,7 +216,9 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
                      int x_ind_left = [self convertIndex:(x_i - 1) x_length:x_len];
                      int x_ind_right = [self convertIndex:(x_i + 1) x_length:x_len];
                  
-                    // test if this part is correct!
+                    // TODO: test if this part is correct!
+                   // I should always get the same result for this one for the same y_i
+                    // -> TEST IT!!!  (WORKING ON THIS NOW)
                      tmp_amplitude =
                         (q2 - q +0.5) * A[x_ind_left + y_i*x_len]
                      + (0.5+q-q*q) * A[x_i + y_i*x_len]
