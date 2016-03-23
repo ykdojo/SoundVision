@@ -187,10 +187,11 @@
 				TargetAttributes = {
 					7DD9FB6D1BF42BCB009956E5 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = TN363JJW64;
+						DevelopmentTeam = 84DT5V2926;
 					};
 					7DD9FB891BF42BCC009956E5 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 84DT5V2926;
 						TestTargetID = 7DD9FB6D1BF42BCB009956E5;
 					};
 				};
