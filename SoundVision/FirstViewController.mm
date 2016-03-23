@@ -155,8 +155,7 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
 
 // convert the x index so that if it's -1 (too much on the left), it becomes (xMax - 1) (on the right most column)
 // and if we have xMax (too much on the right), it becomes 0 (on the left most column)
-- (int)convertIndex:
-(int) xIndex
+- (int) convertIndex: (int) xIndex
            x_length: (int) x_len
 {
     if (xIndex == -1) {
@@ -189,13 +188,6 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     [self.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
      {
          float samplingRate = wself.audioManager.samplingRate;
-
-         // +3.0 helps us get rid of the noise that we don't want at the end.
-         if (t + 4.0 / samplingRate * numFrames >= T){
-             [wself.audioManager pause];
-             state = 0;
-             [wself.playButton setTitle:NSLocalizedString(@"Start Sound Vision", nil) forState:0];
-         }
 
          for (int i=0; i < numFrames; ++i)
          {
@@ -237,10 +229,12 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
                          + (0.5 + q - q2) * A[x_i + y_i*x_len];
                      }
                      else {
+                         int x_ind_left = [self convertIndex:(x_i - 1) x_length:x_len];
+                         int x_ind_right = [self convertIndex:(x_i + 1) x_length:x_len];
                          tmp_amplitude =
-                            (q2 - q +0.5) * A[(x_i - 1) + y_i*x_len]
+                            (q2 - q +0.5) * A[x_ind_left + y_i*x_len]
                          + (0.5+q-q*q) * A[x_i + y_i*x_len]
-                         + q2 * A[(x_i + 1) + y_i*x_len];
+                         + q2 * A[x_ind_right + y_i*x_len];
                      }
                     
                      float theta_l = frequencies[y_i] * M_PI * 2 * tl;
@@ -302,12 +296,24 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     }
     
 //    // IDENTITY
+//    for (int i = 0; i < x*y; i++){
+//        matrix_to_play[i] = 0.0;
+//    }
+//    for (int i = 0; i < y; i++){
+//        matrix_to_play[x * i + i] = 1.0;
+//    }
+
+    
+    //   A single horizontal line
     for (int i = 0; i < x*y; i++){
         matrix_to_play[i] = 0.0;
     }
-    for (int i = 0; i < y; i++){
-        matrix_to_play[x * i + i] = 1.0;
+    for (int i = 0; i < x; i++){
+        matrix_to_play[i + (y*3/4) * x] = 1.0;
     }
+
+    
+    
     
 ////     Peter's strings (it's the B&W drawing here: https://www.seeingwithsound.com/im2sound.htm)
 //    for( int x_i = 0 ; x_i < x ; x_i++ ){
