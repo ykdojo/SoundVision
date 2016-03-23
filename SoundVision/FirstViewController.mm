@@ -153,6 +153,17 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
 }
 
 
+// convert the x index so that if it's -1 (too much on the left), it becomes (xMax - 1) (on the right most column)
+// and if we have xMax (too much on the right), it becomes 0 (on the left most column)
+- (int)convertIndex:
+(int) xIndex
+           x_length: (int) x_len
+{
+    return 1;
+}
+
+
+
 // this function converts the matrix into sound
 - (void)playMatrix: (float*) A
           x_length: (int) x_len
@@ -180,8 +191,11 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
 
          for (int i=0; i < numFrames; ++i)
          {
+             // numFramesTotal = # number of frames for all the columns
+             long numFramesTotal = samplingRate * T;
+             
              // m = # frames per column
-             long m = (long) (samplingRate * T / x_len);
+             long m = (long) (numFramesTotal / x_len);
              float r = 1.0 * current_frame / (floor (T*samplingRate) - 1);
              float theta_2 = (r - 0.5) * 2 * M_PI / 3;
              float head_size = 0.2; // in meters, I think
