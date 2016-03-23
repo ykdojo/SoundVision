@@ -159,7 +159,15 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
 (int) xIndex
            x_length: (int) x_len
 {
-    return 1;
+    if (xIndex == -1) {
+        return x_len - 1;
+    }
+    else if (xIndex == x_len){
+        return 0;
+    }
+    else {
+        return xIndex;
+    }
 }
 
 
@@ -217,8 +225,6 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
              float sl = 0;
              float sr = 0;
              for (int y_i = 0; y_i < y_len; y_i++){
-                 // make sure the index doesn't exceed the limit
-                 if (x_i < x_len){
                      float tmp_amplitude;
                      if (x_i == 0){
                          tmp_amplitude =
@@ -260,7 +266,6 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
                      sl += fade_l * tmp_amplitude * sin(theta_l + phases[y_i]);
                      sr += fade_r * tmp_amplitude * sin(theta_r + phases[y_i]);
 //                     NSLog(@"phase: %f", phases[y_i]);
-                 }
              }
              
              // copying the same data for both channels (left and right speakers)
