@@ -103,7 +103,7 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     frequency_min = self.minFrequencySlider.value = 500.0;
     self.minFrequencyVal.text = [NSString stringWithFormat:@"%i Hertz", (int)roundf(frequency_min)];
     
-    frequency_max = self.maxFrequencySlider.value = 700.0;
+    frequency_max = self.maxFrequencySlider.value = 4000.0;
     self.maxFrequencyVal.text = [NSString stringWithFormat:@"%i Hertz", (int)roundf(frequency_max)];
     
     t = self.speedSlider.value;
