@@ -7,7 +7,7 @@
 
 float t = 0;
 long current_frame = 0;
-int x = 128; // set x = y = 64 when using Peter's strings.
+int x = 1; // set x = y = 64 when using Peter's strings.
 int y = 64;
 float *phases = new float[y]; // random phases
 float *matrix_to_play = new float[x*y];
@@ -258,23 +258,23 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
         //        frequencies[i] = frequency_max - i * frequency_diff / (y - 1);
     }
     
-    // IDENTITY
-    for (int i = 0; i < x*y; i++){
-        matrix_to_play[i] = 0.0;
-    }
-    for (int i = 0; i < y; i++){
-        matrix_to_play[x * i + i] = 1.0;
-        matrix_to_play[x * (63 - i) + (i + 64)] = 1.0;
-    }
-
-    
-//    //   A single horizontal line
+//    // IDENTITY
 //    for (int i = 0; i < x*y; i++){
 //        matrix_to_play[i] = 0.0;
 //    }
-//    for (int i = 0; i < x; i++){
-//        matrix_to_play[i + (y*3/4) * x] = 1.0;
+//    for (int i = 0; i < y; i++){
+//        matrix_to_play[x * i + i] = 1.0;
+//        matrix_to_play[x * (63 - i) + (i + 64)] = 1.0;
 //    }
+
+    
+    //   A single horizontal line
+    for (int i = 0; i < x*y; i++){
+        matrix_to_play[i] = 0.0;
+    }
+    for (int i = 0; i < x; i++){
+        matrix_to_play[i + (y*3/4) * x] = 1.0;
+    }
 
     
     
