@@ -176,6 +176,17 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
           x_length: (int) x_len
           y_length: (int) y_len
 {
+    
+    frequencies[0] = frequency_max;
+    float mult_rate = pow( frequency_min / frequency_max, 1/float(y-1));
+    for (int i = 1; i < y; i++) {
+        // exponential scale
+        frequencies[i] = frequencies[i - 1] * mult_rate;
+        
+        // linear scale
+        //        frequencies[i] = frequency_max - i * frequency_diff / (y - 1);
+    }
+
 
     __weak FirstViewController * wself = self;
     t = 0;
@@ -248,15 +259,6 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     [super viewWillAppear:animated];
     
     self.audioManager = [Novocaine audioManager];
-    frequencies[0] = frequency_max;
-    float mult_rate = pow( frequency_min / frequency_max, 1/float(y-1));
-    for (int i = 1; i < y; i++) {
-        // exponential scale
-        frequencies[i] = frequencies[i - 1] * mult_rate;
-        
-        // linear scale
-        //        frequencies[i] = frequency_max - i * frequency_diff / (y - 1);
-    }
     
 //    // IDENTITY
 //    for (int i = 0; i < x*y; i++){
