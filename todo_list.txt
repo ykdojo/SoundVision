@@ -1,0 +1,3 @@
+- Refactor matrix_to_play to a 2-dimentional array instead of the 1 dimentional array right now
+- Refactor the outputblock to call a pause function
+- Verify that setoutput block runs 86 times (samplingRate / numFrames)

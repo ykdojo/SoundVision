@@ -13,14 +13,11 @@ float *phases = new float[y]; // random phases
 float *matrix_to_play = new float[x*y];
 int state = 0; // TODO: Fix this to an enum.
 
-float *frequencies = new float[y];
+float *rowFrequencies = new float[y];
 float frequency_max;
 float frequency_min;
 const float T = 1.05; // time length of one cycle
 const float amplitude = 0.05; // the maximum amplitude we can use seems to be like 0.05.  I'm not 100% sure on this though.
-
-
-// something
 
 // Peter's house and car drawing, 64 x 64 pixels,
 // 'a' represents black (far) wheras 'p' represents white (near)
@@ -147,9 +144,9 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
         [selectedButton setTitle:NSLocalizedString(@"Stop Sound Vision", nil) forState:0];
         state = 1;
     } else {
-        [self.audioManager pause];
-        [selectedButton setTitle:NSLocalizedString(@"Start Sound Vision", nil) forState:0];
-        state = 0;
+//        [self.audioManager pause];
+//        [selectedButton setTitle:NSLocalizedString(@"Start Sound Vision", nil) forState:0];
+//        state = 0;
     }
 }
 
@@ -161,17 +158,25 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
 {
 
     __weak FirstViewController * wself = self;
+    // we need this because we cannot access self directly from the output block
+
     t = 0;
     current_frame = 0;
     for (int i = 0; i < y_len; i++){
+        // Randomizing phase start for each frequency
         phases[i] = (float)rand() / RAND_MAX * 2 * M_PI;
     }
     
 
+    // Note:
+    //   numFrames = 512
+    //   numChannels = 2 (stereo)
     [self.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
      {
          float samplingRate = wself.audioManager.samplingRate;
 
+         
+         //TODO: put this into a pause() function
          // +3.0 helps us get rid of the noise that we don't want at the end.
          if (t + 4.0 / samplingRate * numFrames >= T){
              [wself.audioManager pause];
@@ -219,15 +224,15 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
                          + q2 * A[(x_i + 1) + y_i*x_len];
                      }
                     
-                     float theta_l = frequencies[y_i] * M_PI * 2 * tl;
-                     float theta_r = frequencies[y_i] * M_PI * 2 * tr;
+                     float theta_l = rowFrequencies[y_i] * M_PI * 2 * tl;
+                     float theta_r = rowFrequencies[y_i] * M_PI * 2 * tr;
                      
                      float x_abs = fabs(x_distance);
                      float diffraction;
-                     if (v / frequencies[y - y_i - 1] > x_abs){
+                     if (v / rowFrequencies[y - y_i - 1] > x_abs){
                          diffraction = 1;
                      } else {
-                         diffraction = v / (x_abs * frequencies[y - y_i - 1]);
+                         diffraction = v / (x_abs * rowFrequencies[y - y_i - 1]);
                      }
 
                      float fade_l = 1;
@@ -244,7 +249,7 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
 //                     NSLog(@"phase: %f", phases[y_i]);
                  }
              }
-             
+         
              // copying the same data for both channels (left and right speakers)
              for (int iChannel = 0; iChannel < numChannels; ++iChannel)
              {
@@ -254,10 +259,11 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
                  } else { // right channel
                      data[i*numChannels + iChannel] = sr * amplitude;
                  }
+                
              }
              t += 1.0 / samplingRate;
          }
-     }];
+     }]; // [self.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
     [self.audioManager play];
 }
 
@@ -268,23 +274,25 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     [super viewWillAppear:animated];
     
     self.audioManager = [Novocaine audioManager];
-    frequencies[0] = frequency_max;
+    rowFrequencies[0] = frequency_max; // each frequency corresponds to each row
     float mult_rate = pow( frequency_min / frequency_max, 1/float(y-1));
     for (int i = 1; i < y; i++) {
         // exponential scale
-        frequencies[i] = frequencies[i - 1] * mult_rate;
+        rowFrequencies[i] = rowFrequencies[i - 1] * mult_rate;
+        // this is written so that rowFrequencies[y] = frequency_min
         
         // linear scale
         //        frequencies[i] = frequency_max - i * frequency_diff / (y - 1);
     }
     
-//    // IDENTITY
+//  IDENTITY (meaning, 1's on the digonal and 0's everywhere else)
     for (int i = 0; i < x*y; i++){
         matrix_to_play[i] = 0.0;
     }
     for (int i = 0; i < y; i++){
         matrix_to_play[x * i + i] = 1.0;
     }
+    // matrix_to_play[x_index * y_index + y_index] tod
     
     [self playMatrix:matrix_to_play x_length: x y_length: y];
     
