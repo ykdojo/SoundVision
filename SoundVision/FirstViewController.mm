@@ -14,8 +14,8 @@ float *matrix_to_play = new float[x*y];
 int state = 0; // TODO: Fix this to an enum.
 
 float *frequencies = new float[y];
-float frequency_max = 5000.0;
-float frequency_min = 500.0;
+float frequency_max;
+float frequency_min;
 const float T = 1.05; // time length of one cycle
 const float amplitude = 0.05; // the maximum amplitude we can use seems to be like 0.05.  I'm not 100% sure on this though.
 
@@ -100,10 +100,10 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    frequency_min = self.minFrequencySlider.value;
+    frequency_min = self.minFrequencySlider.value = 500.0;
     self.minFrequencyVal.text = [NSString stringWithFormat:@"%i Hertz", (int)roundf(frequency_min)];
     
-    frequency_max = self.maxFrequencySlider.value;
+    frequency_max = self.maxFrequencySlider.value = 5000.0;
     self.maxFrequencyVal.text = [NSString stringWithFormat:@"%i Hertz", (int)roundf(frequency_max)];
     
     t = self.speedSlider.value;
