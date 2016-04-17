@@ -17,7 +17,7 @@ float *rowFrequencies = new float[y];
 float frequency_max;
 float frequency_min;
 const float T = 1.05; // time length of one cycle
-const float amplitude = 0.05; // the maximum amplitude we can use seems to be like 0.05.  I'm not 100% sure on this though.
+const float AMPLITUDE = 0.05; // the maximum amplitude we can use seems to be like 0.05.  I'm not 100% sure on this though.
 
 // Peter's house and car drawing, 64 x 64 pixels,
 // 'a' represents black (far) wheras 'p' represents white (near)
@@ -187,66 +187,16 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
          for (int i=0; i < numFrames; ++i)
          {
              long m = (long) (samplingRate * T / x_len);
-             float r = 1.0 * current_frame / (floor (T*samplingRate) - 1);
-             float theta_2 = (r - 0.5) * 2 * M_PI / 3;
-             float head_size = 0.2; // in meters, I think
-             float x_distance = 0.5 * head_size * (theta_2 + sin(theta_2));
-             float v = 340; // speed of sound, 340 m/s
-             float tl = t;
-             float tr = t;
-             tr += x_distance / v;
-             
              int x_i = current_frame / m;
-             float q = 1.0 * (current_frame % m) / (m - 1);
-             float q2 = 0.5*q*q;
              current_frame += 1;
-
-             float sl = 0;
-             float sr = 0;
+             float s = 0;
+             
              for (int y_i = 0; y_i < y_len; y_i++){
-                 // make sure the index doesn't exceed the limit
+                 // make sure the index doesn't exceed the limit with the if condition
                  if (x_i < x_len){
-                     float tmp_amplitude;
-                     if (x_i == 0){
-                         tmp_amplitude =
-                            (1.0 - q2) * A[x_i + y_i*x_len]
-                         + q2 * A[(x_i + 1) + y_i*x_len];
-                     }
-                     else if (x_i == x_len - 1) {
-                         tmp_amplitude =
-                            (q2 - q +0.5) * A[(x_i - 1) + y_i*x_len]
-                         + (0.5 + q - q2) * A[x_i + y_i*x_len];
-                     }
-                     else {
-                         tmp_amplitude =
-                            (q2 - q +0.5) * A[(x_i - 1) + y_i*x_len]
-                         + (0.5+q-q*q) * A[x_i + y_i*x_len]
-                         + q2 * A[(x_i + 1) + y_i*x_len];
-                     }
-                    
-                     float theta_l = rowFrequencies[y_i] * M_PI * 2 * tl;
-                     float theta_r = rowFrequencies[y_i] * M_PI * 2 * tr;
-                     
-                     float x_abs = fabs(x_distance);
-                     float diffraction;
-                     if (v / rowFrequencies[y - y_i - 1] > x_abs){
-                         diffraction = 1;
-                     } else {
-                         diffraction = v / (x_abs * rowFrequencies[y - y_i - 1]);
-                     }
-
-                     float fade_l = 1;
-                     float fade_r = 1;
-
-//                     if (theta_2 < 0.0) { fade_l = 1.0; fade_r = diffraction; }
-//                     else { fade_l = diffraction; fade_r = 1; }
-                     
-                     fade_l *= (1.0 - 0.7*r);
-                     fade_r *= (0.3 + 0.7*r);
-
-                     sl += fade_l * tmp_amplitude * sin(theta_l + phases[y_i]);
-                     sr += fade_r * tmp_amplitude * sin(theta_r + phases[y_i]);
-//                     NSLog(@"phase: %f", phases[y_i]);
+                     float theta = rowFrequencies[y_i] * M_PI * 2 * t;
+                     float tmp_amplitude = A[x_i + y_i*x_len];
+                     s += tmp_amplitude * sin(theta + phases[y_i]);
                  }
              }
          
@@ -255,9 +205,9 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
              {
                  // left channel
                  if(iChannel == 0) {
-                     data[i*numChannels + iChannel] = sl * amplitude;
+                     data[i*numChannels + iChannel] = s * AMPLITUDE;
                  } else { // right channel
-                     data[i*numChannels + iChannel] = sr * amplitude;
+                     data[i*numChannels + iChannel] = s * AMPLITUDE;
                  }
                 
              }
