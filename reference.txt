@@ -1,0 +1,4 @@
+To understand where smoothing / left-right code comes from read the following.
+https://www.seeingwithsound.com/im2sound.htm
+-> go to https://www.seeingwithsound.com/hificode.ck
+
