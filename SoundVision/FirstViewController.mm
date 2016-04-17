@@ -5,7 +5,7 @@
 
 @implementation FirstViewController
 
-float t = 0;
+float currentTime = 0;
 long current_frame = 0;
 int x = 64; // set x = y = 64 when using Peter's strings.
 int y = 64;
@@ -16,7 +16,7 @@ int state = 0; // TODO: Fix this to an enum.
 float *rowFrequencies = new float[y];
 float frequency_max;
 float frequency_min;
-const float T = 1.05; // time length of one cycle
+const float lengthOfTimeMatrixIsPlaying = 1.05; // time length of one cycle
 const float AMPLITUDE = 0.05; // the maximum amplitude we can use seems to be like 0.05.  I'm not 100% sure on this though.
 
 // Peter's house and car drawing, 64 x 64 pixels,
@@ -103,8 +103,8 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     frequency_max = self.maxFrequencySlider.value = 5000.0;
     self.maxFrequencyVal.text = [NSString stringWithFormat:@"%i Hertz", (int)roundf(frequency_max)];
     
-    t = self.speedSlider.value;
-    self.speedVal.text = [NSString stringWithFormat:@"%.1f s", t];
+    currentTime = self.speedSlider.value;
+    self.speedVal.text = [NSString stringWithFormat:@"%.1f s", currentTime];
     
 }
 
@@ -130,9 +130,9 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
 
 
 - (IBAction)speedSet:(id)sender {
-    t = self.speedSlider.value;
+    currentTime = self.speedSlider.value;
     
-    self.speedVal.text = [NSString stringWithFormat:@"%.1f s", t];
+    self.speedVal.text = [NSString stringWithFormat:@"%.1f s", currentTime];
 }
 
 
@@ -152,17 +152,17 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
 
 
 // this function converts the matrix into sound
-- (void)playMatrix: (float*) A
-          x_length: (int) x_len
-          y_length: (int) y_len
+- (void)playMatrix: (float*) matrixToPlay
+          x_length: (int) totalNumberOfColumns
+          y_length: (int) totalNumberOfRows
 {
 
     __weak FirstViewController * wself = self;
     // we need this because we cannot access self directly from the output block
 
-    t = 0;
+    currentTime = 0;
     current_frame = 0;
-    for (int i = 0; i < y_len; i++){
+    for (int i = 0; i < totalNumberOfRows; i++){
         // Randomizing phase start for each frequency
         phases[i] = (float)rand() / RAND_MAX * 2 * M_PI;
     }
@@ -178,7 +178,7 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
          
          //TODO: put this into a pause() function
          // +3.0 helps us get rid of the noise that we don't want at the end.
-         if (t + 4.0 / samplingRate * numFrames >= T){
+         if (currentTime + 4.0 / samplingRate * numFrames >= lengthOfTimeMatrixIsPlaying){
              [wself.audioManager pause];
              state = 0;
              [wself.playButton setTitle:NSLocalizedString(@"Start Sound Vision", nil) forState:0];
@@ -186,32 +186,28 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
 
          for (int i=0; i < numFrames; ++i)
          {
-             long m = (long) (samplingRate * T / x_len);
-             int x_i = current_frame / m;
+             long totalNumberOfFrames = samplingRate * lengthOfTimeMatrixIsPlaying;
+             long numberOfFramesPerColumn = (long) (totalNumberOfFrames / totalNumberOfColumns);
+             int currentColumn = current_frame / numberOfFramesPerColumn;
              current_frame += 1;
-             float s = 0;
+             float totalAmplitudeOfCurrentFrame = 0;
              
-             for (int y_i = 0; y_i < y_len; y_i++){
+             for (int rowIndex = 0; rowIndex < totalNumberOfRows; rowIndex++){
                  // make sure the index doesn't exceed the limit with the if condition
-                 if (x_i < x_len){
-                     float theta = rowFrequencies[y_i] * M_PI * 2 * t;
-                     float tmp_amplitude = A[x_i + y_i*x_len];
-                     s += tmp_amplitude * sin(theta + phases[y_i]);
+                 if (currentColumn < totalNumberOfColumns){
+                     float theta = rowFrequencies[rowIndex] * M_PI * 2 * currentTime;
+                     int oneDimentionArrayIndex = currentColumn + rowIndex*totalNumberOfColumns;
+                     float amplitudeFromDepthCell = matrixToPlay[oneDimentionArrayIndex];
+                     totalAmplitudeOfCurrentFrame += amplitudeFromDepthCell * sin(theta + phases[rowIndex]);
                  }
              }
          
              // copying the same data for both channels (left and right speakers)
              for (int iChannel = 0; iChannel < numChannels; ++iChannel)
              {
-                 // left channel
-                 if(iChannel == 0) {
-                     data[i*numChannels + iChannel] = s * AMPLITUDE;
-                 } else { // right channel
-                     data[i*numChannels + iChannel] = s * AMPLITUDE;
-                 }
-                
+                data[i*numChannels + iChannel] = totalAmplitudeOfCurrentFrame * AMPLITUDE;
              }
-             t += 1.0 / samplingRate;
+             currentTime += 1.0 / samplingRate;
          }
      }]; // [self.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
     [self.audioManager play];
