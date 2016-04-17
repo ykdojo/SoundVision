@@ -108,6 +108,7 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     
     t = self.speedSlider.value;
     self.speedVal.text = [NSString stringWithFormat:@"%.1f s", t];
+    
 }
 
 - (void)viewDidUnload
@@ -284,6 +285,8 @@ NSArray *peterStrings = @[  /* N x N pixels, 16 grey levels a,...,p */
     for (int i = 0; i < y; i++){
         matrix_to_play[x * i + i] = 1.0;
     }
+    
+    [self playMatrix:matrix_to_play x_length: x y_length: y];
     
 ////     Peter's strings (it's the B&W drawing here: https://www.seeingwithsound.com/im2sound.htm)
 //    for( int x_i = 0 ; x_i < x ; x_i++ ){
